@@ -1,0 +1,10 @@
+def entryPoint = 'com.example.GameClub'
+apply plugin: 'application'
+
+application {
+    mainClassName = entryPoint
+}
+
+dependencies {
+    implementation project(':gameclub-service')
+}

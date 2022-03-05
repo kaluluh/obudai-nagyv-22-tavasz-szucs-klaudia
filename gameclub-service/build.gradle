@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':gameclub-domain')
+    implementation project(':gameclub-persistence')
+}
