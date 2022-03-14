@@ -1,3 +1,5 @@
+package com.example.domain;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;

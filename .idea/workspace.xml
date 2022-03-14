@@ -4,33 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="Strukt">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Group.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequestState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Limits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-service/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/CredentialsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GroupDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/JoinRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDataDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/groups.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequestState.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequestState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Limits.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +53,9 @@
         <task path="$PROJECT_DIR$/gameclub-app">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/gameclub-persistence">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -69,6 +74,16 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="gameclub" type="f1a62948:ProjectNode" />
+                <item name="gameclub-app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="gameclub" type="f1a62948:ProjectNode" />
+                <item name="gameclub-persistence" type="2d1252cf:ModuleNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -85,6 +100,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -108,11 +131,38 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.3141542" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
   </component>
-  <component name="RunManager" selected="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [classes]">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle build" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.GameClub">
+    <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -176,7 +226,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -187,28 +237,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="run" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia:gameclub-app [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/gameclub-app" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="run" />
+            <option value="dependencies" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -227,11 +256,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [classes]" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [build]" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [clean]" />
-        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia:gameclub-app [run]" />
-        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [run]" />
+        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [buildDependents]" />
+        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [dependencies]" />
+        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [classes]" />
       </list>
     </recent_temporary>
   </component>
@@ -243,8 +272,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646494529134</updated>
-      <workItem from="1646494530414" duration="6123000" />
+      <workItem from="1646494530414" duration="6818000" />
+      <workItem from="1647107195134" duration="257000" />
+      <workItem from="1647109262402" duration="26541000" />
+      <workItem from="1647207985887" duration="225000" />
+      <workItem from="1647248523886" duration="6460000" />
     </task>
+    <task id="LOCAL-00001" summary="Project structure setup">
+      <created>1646500953765</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646500953765</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +303,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Project structure setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project structure setup" />
   </component>
 </project>

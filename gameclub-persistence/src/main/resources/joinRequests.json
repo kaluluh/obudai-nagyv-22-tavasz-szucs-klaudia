@@ -1,0 +1,12 @@
+[
+    {
+        "userId": 4,
+        "groupId": 1,
+        "state": "REQUESTED"
+    },
+    {
+        "userId": 3,
+        "groupId": 2,
+        "state": "REQUESTED"
+    }
+]

@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "loginName": "nagys",
+        "password": "ns-secret",
+        "name": "Nagy Sándor",
+        "email": "nagy.sandor@gmail.com",
+        "roles": ["SUPERUSER"],
+        "games": []
+    },
+    {
+        "id": 2,
+        "loginName": "horvatha",
+        "password": "ha-secret",
+        "name": "Horváth Ádám",
+        "email": "horvath.adam@gmail.com",
+        "roles": ["GROUP_ADMIN", "PLAYER"],
+        "games": [1,2]
+    },
+    {
+        "id": 3,
+        "loginName": "kovacsp",
+        "password": "kp-secret",
+        "name": "Kovács Péter",
+        "email": "kovacs.peter@gmail.com", 
+        "roles": ["PLAYER"],
+        "games": [1]
+    },
+    {
+        "id": 4,
+        "loginName": "kissi", 
+        "password": "ki-secret",
+        "name": "Kiss István",
+        "email": "kiss.istvan@gmail.com",
+        "roles": ["PLAYER"],
+        "games": [2]
+    },
+    {
+        "id": 5,
+        "loginName": "kaluluh",
+        "password": "asd123",
+        "name": "Szucs Klaudia ",
+        "email": "szucs.klaudia@gmail.com",
+        "roles": ["GROUP_ADMIN","PLAYER"],
+        "games": [2]
+    }
+]
