@@ -1,14 +1,15 @@
 package com.example;
 
-import com.example.dto.GameDTO;
-import com.example.dto.GroupDTO;
-import com.example.dto.JoinRequestDTO;
-import com.example.dto.PlayerDTO;
+import com.example.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,6 +24,34 @@ public class DataStore {
     private static final String JOINREQUESTS_FILE_PATH = "gameclub-persistence/src/main/resources/joinRequests.json";
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Getter
+    public List<PlayerDTO> players;
+
+    @Getter
+    private List<GameDTO> games;
+
+    @Getter
+    private List<GroupDTO> groups;
+
+    @Getter
+    private List<JoinRequestDTO> joinRequests;
+
+    @Getter
+    @Setter
+    private CredentialsDTO credentialsDTO;
+
+    @Getter
+    @Setter
+    private UserDataDTO userDataDTO;
+
+    @PostConstruct
+    public void loadData() {
+        players = readPlayers();
+        games = readGames();
+        groups = readGroups();
+        joinRequests = readJoinRequests();
+    }
 
     public static String readFileAsString(String file) {
         String result = null;
@@ -85,5 +114,45 @@ public class DataStore {
         }
         return joinRequests;
     }
+
+    public void writeResultToJSON(List<PlayerDTO> players,List<GameDTO> games, List<GroupDTO> groups, List<JoinRequestDTO> joinRequests) {
+        writePlayersToJSON(players);
+        writeGamesToJSON(games);
+        writeGroupsToJSON(groups);
+        writejoinRequestsToJSON(joinRequests);
+    }
+
+    private void writePlayersToJSON(List<PlayerDTO> players) {
+        if (players != null) {
+            try {
+                objectMapper.writeValue(new File(PLAYERS_FILE_PATH), players);
+            } catch (Exception e ) { log.error("Error writing players...");}
+        }
+    }
+
+    private void writeGamesToJSON(List<GameDTO> games) {
+        if (games != null) {
+            try {
+                objectMapper.writeValue(new File(GAMES_FILE_PATH), games);
+            } catch (Exception e ) { log.error("Error writing games...");}
+        }
+    }
+
+    private void writeGroupsToJSON(List<GroupDTO> groups) {
+        if (groups != null) {
+            try {
+                objectMapper.writeValue(new File(GROUPS_FILE_PATH), groups);
+            } catch (Exception e ) { log.error("Error writing groups...");}
+        }
+    }
+
+    private void writejoinRequestsToJSON(List<JoinRequestDTO> joinRequests) {
+        if (joinRequests != null) {
+            try {
+                objectMapper.writeValue(new File(JOINREQUESTS_FILE_PATH), joinRequests);
+            } catch (Exception e ) { log.error("Error writing join requests...");}
+        }
+    }
+
 
 }

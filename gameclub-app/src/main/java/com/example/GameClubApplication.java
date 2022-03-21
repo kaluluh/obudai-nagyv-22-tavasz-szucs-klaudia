@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class GameClub implements CommandLineRunner {
+public class GameClubApplication implements CommandLineRunner {
 
     private final GameClubService gameClubService;
 
     public static void main(String[] args) {
-       SpringApplication.run(GameClub.class, args);
+       SpringApplication.run(GameClubApplication.class, args);
     }
 
     @Override

@@ -5,34 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/CredentialsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GroupDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/JoinRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDataDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/groups.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/JoinRequestState.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequestState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Limits.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClub.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/JoinRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/JoinRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDataDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDataDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/groups.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/groups.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +235,7 @@
     </configuration>
     <configuration name="GameClub" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="gameclub.gameclub-app.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.GameClub" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.GameClubApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -276,7 +262,11 @@
       <workItem from="1647107195134" duration="257000" />
       <workItem from="1647109262402" duration="26541000" />
       <workItem from="1647207985887" duration="225000" />
-      <workItem from="1647248523886" duration="6460000" />
+      <workItem from="1647248523886" duration="6668000" />
+      <workItem from="1647502802214" duration="18096000" />
+      <workItem from="1647550805758" duration="290000" />
+      <workItem from="1647771746858" duration="10920000" />
+      <workItem from="1647891997013" duration="811000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -285,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646500953765</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="File reading, logging, writing user details ready">
+      <created>1647255669523</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647255669523</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +304,7 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Project structure setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project structure setup" />
+    <MESSAGE value="File reading, logging, writing user details ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="File reading, logging, writing user details ready" />
   </component>
 </project>
