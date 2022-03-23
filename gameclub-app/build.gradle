@@ -7,4 +7,5 @@ application {
 
 dependencies {
     implementation project(':gameclub-service')
+    implementation project(':gameclub-domain')
 }

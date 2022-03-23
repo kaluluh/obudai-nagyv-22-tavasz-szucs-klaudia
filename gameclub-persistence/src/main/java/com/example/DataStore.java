@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.domain.JoinRequestState;
 import com.example.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,11 +15,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
 public class DataStore {
-    private static final String PLAYERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
+    private static final String USERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
     private static final String GAMES_FILE_PATH = "gameclub-persistence/src/main/resources/games.json";
     private static final String GROUPS_FILE_PATH = "gameclub-persistence/src/main/resources/groups.json";
     private static final String JOINREQUESTS_FILE_PATH = "gameclub-persistence/src/main/resources/joinRequests.json";
@@ -26,7 +28,7 @@ public class DataStore {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Getter
-    public List<PlayerDTO> players;
+    public List<UserDTO> users;
 
     @Getter
     private List<GameDTO> games;
@@ -39,18 +41,57 @@ public class DataStore {
 
     @Getter
     @Setter
-    private CredentialsDTO credentialsDTO;
+    private Credentials credentials;
 
     @Getter
     @Setter
-    private UserDataDTO userDataDTO;
+    private PlayerDTO player;
 
     @PostConstruct
     public void loadData() {
-        players = readPlayers();
+        users = readPlayers();
         games = readGames();
         groups = readGroups();
         joinRequests = readJoinRequests();
+    }
+
+    public PlayerDTO getPlayer(UserDTO user) {
+
+        player.setGameIds(user.getGames());
+        player.setId(user.getId());
+        player.setName(user.getName());
+
+        games.forEach( g -> {
+            player.getGameIds().forEach( u -> {
+                if (g.getId() == u) {
+                    player.getGames().add(g);
+                }
+            });
+        });
+
+        groups.forEach( g -> {
+            g.getMembers().forEach( m -> {
+                if (m == player.getId()){
+                    player.setGroupName(g.getName());
+                    player.setGroupId(g.getId());
+                }
+            });
+        });
+
+        List<JoinRequestDTO> joinRequestList = joinRequests.stream()
+                .filter(j -> j.getGroupId() ==  player.getGroupId() && j.getState() == JoinRequestState.REQUESTED)
+                .collect(Collectors.toList());
+        if (!joinRequestList.isEmpty()){
+            joinRequestList.forEach( j -> {
+                users.forEach(p -> {
+                    if (j.getUserId() == p.getId()) {
+                        player.addPlayerName(p.getName());
+                        player.addPlayerJoinRequest(p);
+                    }
+                });
+            });
+        }
+        return player;
     }
 
     public static String readFileAsString(String file) {
@@ -63,17 +104,17 @@ public class DataStore {
         return result;
     }
 
-    public List<PlayerDTO> readPlayers() {
-        List<PlayerDTO> players = new ArrayList<>();
-        String json = readFileAsString(PLAYERS_FILE_PATH);
+    public List<UserDTO> readPlayers() {
+        List<UserDTO> users = new ArrayList<>();
+        String json = readFileAsString(USERS_FILE_PATH);
         if (json != null) {
             try {
-                players = objectMapper.readValue(json,new TypeReference<List<PlayerDTO>>(){});
+                users = objectMapper.readValue(json,new TypeReference<List<UserDTO>>(){});
             } catch (Exception e) {
-                log.error("Error reading players: {}", json, e);
+                log.error("Error reading users: {}", json, e);
             }
         }
-        return players;
+        return users;
     }
 
     public List<GameDTO> readGames() {
@@ -115,17 +156,17 @@ public class DataStore {
         return joinRequests;
     }
 
-    public void writeResultToJSON(List<PlayerDTO> players,List<GameDTO> games, List<GroupDTO> groups, List<JoinRequestDTO> joinRequests) {
-        writePlayersToJSON(players);
+    public void writeResultToJSON() {
+        writePlayersToJSON(users);
         writeGamesToJSON(games);
         writeGroupsToJSON(groups);
         writejoinRequestsToJSON(joinRequests);
     }
 
-    private void writePlayersToJSON(List<PlayerDTO> players) {
+    private void writePlayersToJSON(List<UserDTO> players) {
         if (players != null) {
             try {
-                objectMapper.writeValue(new File(PLAYERS_FILE_PATH), players);
+                objectMapper.writeValue(new File(USERS_FILE_PATH), players);
             } catch (Exception e ) { log.error("Error writing players...");}
         }
     }
