@@ -84,6 +84,7 @@ public class ConsoleView {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please enter the required fields to the new game:\n");
         try {
+            System.out.println("\nId:");
             long id = Long.parseLong(reader.readLine());
             System.out.println("\nName:");
             String name = reader.readLine();
@@ -103,7 +104,6 @@ public class ConsoleView {
             int to = Integer.parseInt(reader.readLine());
             gameFormDTO = new GameFormDTO(id,name,description,minimumAge,categories,min,max,from,to);
         } catch (Exception e) {}
-        System.out.println("\nId:");
 
         return gameFormDTO;
     }
@@ -265,7 +265,7 @@ public class ConsoleView {
     }
 
     private MenuItem consoleWriteSuperUserMenu() {
-        System.out.println("Here are the possible actions:  \n6.Create new game \nPlease choose an item:");
+        System.out.println("Here are the possible actions:  \n5. Quit application\n6.Create new game \nPlease choose an item:");
         int selectedNumber = readingSelectedMenuNumber();
         MenuItem menuItem = null;
         try {

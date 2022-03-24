@@ -1,1 +1,1 @@
-[{"userId":4,"groupId":1,"state":"REQUESTED"},{"userId":3,"groupId":2,"state":"REQUESTED"},{"userId":5,"groupId":1,"state":"REQUESTED"},{"userId":3,"groupId":2,"state":"REJECTED"}]
+[{"userId":4,"groupId":1,"state":"REQUESTED"},{"userId":3,"groupId":2,"state":"REQUESTED"},{"userId":5,"groupId":1,"state":"REQUESTED"},{"userId":3,"groupId":2,"state":"REJECTED"},{"userId":3,"groupId":2,"state":"ACCEPTED"}]

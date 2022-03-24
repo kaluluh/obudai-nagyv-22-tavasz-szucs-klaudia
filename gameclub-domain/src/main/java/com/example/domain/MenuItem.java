@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum MenuItem {
-    LISTALLGAMES(1),ADMYGAME(2),CREATEJOINREQUESTS(3),PROCESSINGMEMBERSHIP(4),QUIT(5),CREATEGAME(8);
+    LISTALLGAMES(1),ADMYGAME(2),CREATEJOINREQUESTS(3),PROCESSINGMEMBERSHIP(4),QUIT(5),CREATEGAME(6);
 
     @Getter
     private int id;

@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/MenuItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameFormDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/CredentialsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/Credentials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDataDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/MenuItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/games.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +262,8 @@
       <workItem from="1647891997013" duration="6208000" />
       <workItem from="1647898728672" duration="11000" />
       <workItem from="1647972347098" duration="4784000" />
-      <workItem from="1648064946809" duration="10665000" />
+      <workItem from="1648064946809" duration="10752000" />
+      <workItem from="1648126916252" duration="679000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -292,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647892989913</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Refactoring ready">
+      <created>1648075744799</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648075744799</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +317,7 @@
     <MESSAGE value="Project structure setup" />
     <MESSAGE value="File reading, logging, writing user details ready" />
     <MESSAGE value="Menu functions ready, making separate modules" />
-    <option name="LAST_COMMIT_MESSAGE" value="Menu functions ready, making separate modules" />
+    <MESSAGE value="Refactoring ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring ready" />
   </component>
 </project>
