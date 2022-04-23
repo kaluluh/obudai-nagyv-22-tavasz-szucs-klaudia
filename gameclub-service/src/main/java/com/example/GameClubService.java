@@ -158,6 +158,15 @@ public class GameClubService {
     public boolean addNewGame(GameFormDTO gameFormDTO) {
         boolean isSucces = false;
         List<Category> categoriesList = new ArrayList<>();
+        if (gameFormDTO.getCategories().contains(",")) {
+            String[] categoriesArray = gameFormDTO.getCategories().split(",");
+            for (String category: categoriesArray) {
+                categoriesList.add(Category.valueOf(category));
+            }
+        } else {
+            categoriesList.add(Category.valueOf(gameFormDTO.getCategories()));
+        }
+
         this.dataStore.getGames().add(
                 new GameDTO(gameFormDTO.getId(),gameFormDTO.getName(),gameFormDTO.getDescription(),gameFormDTO.getMinimumAge(),categoriesList,
                 new LimitsDTO(gameFormDTO.getMin(),gameFormDTO.getMax()),

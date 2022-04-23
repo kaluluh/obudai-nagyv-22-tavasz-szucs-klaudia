@@ -1,10 +1,13 @@
 package com.example;
 
 import com.example.domain.JoinRequestState;
+import com.example.domain.Player;
 import com.example.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -12,18 +15,26 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 
 @Slf4j
 @Repository
+@RequiredArgsConstructor
 public class DataStore {
-    private static final String USERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
+//    private static final String USERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
+    private static final String USERS_FILE_PATH = "resources/users.json";
     private static final String GAMES_FILE_PATH = "gameclub-persistence/src/main/resources/games.json";
+//    private static final String GAMES_FILE_PATH = "/resources/games.json";
     private static final String GROUPS_FILE_PATH = "gameclub-persistence/src/main/resources/groups.json";
+//    private static final String GROUPS_FILE_PATH = "/resources/groups.json";
     private static final String JOINREQUESTS_FILE_PATH = "gameclub-persistence/src/main/resources/joinRequests.json";
+//    private static final String JOINREQUESTS_FILE_PATH = "/resources/joinRequests.json";
+
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -47,12 +58,14 @@ public class DataStore {
     @Setter
     private PlayerDTO player;
 
+    private final ErrorHandler errorHandler;
+
     @PostConstruct
     public void loadData() {
-        users = readPlayers();
-        games = readGames();
-        groups = readGroups();
-        joinRequests = readJoinRequests();
+        users = errorHandler.evaluateAndHandle(this::readPlayers);
+        games = errorHandler.evaluateAndHandle(this::readGames);
+        groups = errorHandler.evaluateAndHandle(this::readGroups);
+        joinRequests = errorHandler.evaluateAndHandle(this::readJoinRequests);
     }
 
     public PlayerDTO getPlayer(UserDTO user) {
@@ -104,53 +117,53 @@ public class DataStore {
         return result;
     }
 
-    public List<UserDTO> readPlayers() {
+    public List<UserDTO> readPlayers() throws DataFormatException {
         List<UserDTO> users = new ArrayList<>();
         String json = readFileAsString(USERS_FILE_PATH);
         if (json != null) {
             try {
                 users = objectMapper.readValue(json,new TypeReference<List<UserDTO>>(){});
             } catch (Exception e) {
-                log.error("Error reading users: {}", json, e);
+                throw new IllegalArgumentException("Error reading users: " + json, e);
             }
         }
         return users;
     }
 
-    public List<GameDTO> readGames() {
+    public List<GameDTO> readGames() throws DataFormatException {
         List<GameDTO> games = new ArrayList<>();
         String json = readFileAsString(GAMES_FILE_PATH);
         if (json != null) {
             try {
                 games = objectMapper.readValue(json,new TypeReference<List<GameDTO>>(){});
             } catch (Exception e) {
-                log.error("Error reading players: {}", json, e);
+                throw new IllegalArgumentException("Error reading players: " + json, e);
             }
         }
         return games;
     }
 
-    public List<GroupDTO> readGroups() {
+    public List<GroupDTO> readGroups() throws DataFormatException {
         List<GroupDTO> groups = new ArrayList<>();
         String json = readFileAsString(GROUPS_FILE_PATH);
         if (json != null) {
             try {
                 groups = objectMapper.readValue(json,new TypeReference<List<GroupDTO>>(){});
             } catch (Exception e) {
-                log.error("Error reading players: {}", json, e);
+                throw new IllegalArgumentException("Error reading groups: " + json, e);
             }
         }
         return groups;
     }
 
-    public List<JoinRequestDTO> readJoinRequests() {
+    public List<JoinRequestDTO> readJoinRequests() throws DataFormatException {
         List<JoinRequestDTO> joinRequests = new ArrayList<>();
         String json = readFileAsString(JOINREQUESTS_FILE_PATH);
         if (json != null) {
             try {
                 joinRequests = objectMapper.readValue(json,new TypeReference<List<JoinRequestDTO>>(){});
             } catch (Exception e) {
-                log.error("Error reading players: {}", json, e);
+                throw new IllegalArgumentException("Error reading join requests: " + json, e);
             }
         }
         return joinRequests;
@@ -195,5 +208,8 @@ public class DataStore {
         }
     }
 
+    private Player toPlayer(UserDTO userDTO) {
+            return new Player();
+    }
 
 }
