@@ -251,7 +251,7 @@ public class ConsoleView {
     }
     private MenuItem consoleWritePlayerMenu() {
         System.out.println("Here are the possible actions:  \n1. View list of all games \n2. Add my game " +
-                "5. Quit application\n\nPlease choose an item:");
+                "\n5. Quit application\n\nPlease choose an item:");
         int selectedNumber = readingSelectedMenuNumber();
         MenuItem menuItem = null;
         try {

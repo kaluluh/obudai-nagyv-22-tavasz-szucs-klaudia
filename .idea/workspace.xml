@@ -4,35 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="Soma changes">
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/GameForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/GroupInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/TransformableToDomainObject.java" afterDir="false" />
+    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/AbstractTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/GroupAdminActionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/PlayerActionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/com/example/AbstractTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/com/example/GroupAdminActionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/test/java/com/example/PlayerActionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/JoinRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Limits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/Credentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/domain/Credentials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GameFormDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/GroupDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/LimitsDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/PlayerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-domain/src/main/java/com/example/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/DataStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/joinRequests.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,7 +285,9 @@
       <workItem from="1650721952089" duration="157000" />
       <workItem from="1650732283651" duration="95000" />
       <workItem from="1651405742221" duration="316000" />
-      <workItem from="1651406133154" duration="1602000" />
+      <workItem from="1651406133154" duration="1865000" />
+      <workItem from="1651408732669" duration="4000" />
+      <workItem from="1651408758445" duration="97000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -355,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650732325119</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added transformations between domain and dto objects">
+      <created>1651408641473</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1651408641473</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +365,8 @@
     <MESSAGE value="Refactoring ready" />
     <MESSAGE value="Some changes" />
     <MESSAGE value="Soma changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Soma changes" />
+    <MESSAGE value="Added transformations between domain and dto objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added transformations between domain and dto objects" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
