@@ -1,11 +1,10 @@
 package com.example;
 
-import com.example.domain.JoinRequestState;
+import com.example.domain.Credentials;
 import com.example.domain.Player;
 import com.example.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,23 +14,20 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.zip.DataFormatException;
 
 @Slf4j
 @Repository
 @RequiredArgsConstructor
 public class DataStore {
-//    private static final String USERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
+    //    private static final String USERS_FILE_PATH = "gameclub-persistence/src/main/resources/users.json";
     private static final String USERS_FILE_PATH = "resources/users.json";
     private static final String GAMES_FILE_PATH = "gameclub-persistence/src/main/resources/games.json";
-//    private static final String GAMES_FILE_PATH = "/resources/games.json";
+    //    private static final String GAMES_FILE_PATH = "/resources/games.json";
     private static final String GROUPS_FILE_PATH = "gameclub-persistence/src/main/resources/groups.json";
-//    private static final String GROUPS_FILE_PATH = "/resources/groups.json";
+    //    private static final String GROUPS_FILE_PATH = "/resources/groups.json";
     private static final String JOINREQUESTS_FILE_PATH = "gameclub-persistence/src/main/resources/joinRequests.json";
 //    private static final String JOINREQUESTS_FILE_PATH = "/resources/joinRequests.json";
 
@@ -56,7 +52,7 @@ public class DataStore {
 
     @Getter
     @Setter
-    private PlayerDTO player;
+    private Player currentPlayer;
 
     private final ErrorHandler errorHandler;
 
@@ -68,44 +64,43 @@ public class DataStore {
         joinRequests = errorHandler.evaluateAndHandle(this::readJoinRequests);
     }
 
-    public PlayerDTO getPlayer(UserDTO user) {
-
-        player.setGameIds(user.getGames());
-        player.setId(user.getId());
-        player.setName(user.getName());
-
-        games.forEach( g -> {
-            player.getGameIds().forEach( u -> {
-                if (g.getId() == u) {
-                    player.getGames().add(g);
-                }
-            });
-        });
-
-        groups.forEach( g -> {
-            g.getMembers().forEach( m -> {
-                if (m == player.getId()){
-                    player.setGroupName(g.getName());
-                    player.setGroupId(g.getId());
-                }
-            });
-        });
-
-        List<JoinRequestDTO> joinRequestList = joinRequests.stream()
-                .filter(j -> j.getGroupId() ==  player.getGroupId() && j.getState() == JoinRequestState.REQUESTED)
-                .collect(Collectors.toList());
-        if (!joinRequestList.isEmpty()){
-            joinRequestList.forEach( j -> {
-                users.forEach(p -> {
-                    if (j.getUserId() == p.getId()) {
-                        player.addPlayerName(p.getName());
-                        player.addPlayerJoinRequest(p);
-                    }
-                });
-            });
-        }
-        return player;
-    }
+//    public PlayerDTO getPlayer(UserDTO user) {
+//        player.setGameIds(user.getGames());
+//        player.setId(user.getId());
+//        player.setName(user.getName());
+//
+//        games.forEach(g -> {
+//            player.getGameIds().forEach( u -> {
+//                if (g.getId() == u) {
+//                    player.getGames().add(g);
+//                }
+//            });
+//        });
+//
+//        groups.forEach(g -> {
+//            g.getMembers().forEach( m -> {
+//                if (m == player.getId()){
+//                    player.setGroupName(g.getName());
+//                    player.setGroupId(g.getId());
+//                }
+//            });
+//        });
+//
+//        List<JoinRequestDTO> joinRequestList = joinRequests.stream()
+//                .filter(j -> j.getGroupId() ==  player.getGroupId() && j.getState() == JoinRequestState.REQUESTED)
+//                .collect(Collectors.toList());
+//        if (!joinRequestList.isEmpty()){
+//            joinRequestList.forEach( j -> {
+//                users.forEach(p -> {
+//                    if (j.getUserId() == p.getId()) {
+//                        player.addPlayerName(p.getName());
+//                        player.addPlayerJoinRequest(p);
+//                    }
+//                });
+//            });
+//        }
+//        return player;
+//    }
 
     public static String readFileAsString(String file) {
         String result = null;
@@ -117,12 +112,12 @@ public class DataStore {
         return result;
     }
 
-    public List<UserDTO> readPlayers() throws DataFormatException {
+    public List<UserDTO> readPlayers() throws IllegalArgumentException {
         List<UserDTO> users = new ArrayList<>();
         String json = readFileAsString(USERS_FILE_PATH);
         if (json != null) {
             try {
-                users = objectMapper.readValue(json,new TypeReference<List<UserDTO>>(){});
+                users = objectMapper.readValue(json, new TypeReference<List<UserDTO>>(){});
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error reading users: " + json, e);
             }
@@ -130,12 +125,12 @@ public class DataStore {
         return users;
     }
 
-    public List<GameDTO> readGames() throws DataFormatException {
+    public List<GameDTO> readGames() throws IllegalArgumentException {
         List<GameDTO> games = new ArrayList<>();
         String json = readFileAsString(GAMES_FILE_PATH);
         if (json != null) {
             try {
-                games = objectMapper.readValue(json,new TypeReference<List<GameDTO>>(){});
+                games = objectMapper.readValue(json, new TypeReference<List<GameDTO>>(){});
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error reading players: " + json, e);
             }
@@ -143,12 +138,12 @@ public class DataStore {
         return games;
     }
 
-    public List<GroupDTO> readGroups() throws DataFormatException {
+    public List<GroupDTO> readGroups() throws IllegalArgumentException {
         List<GroupDTO> groups = new ArrayList<>();
         String json = readFileAsString(GROUPS_FILE_PATH);
         if (json != null) {
             try {
-                groups = objectMapper.readValue(json,new TypeReference<List<GroupDTO>>(){});
+                groups = objectMapper.readValue(json, new TypeReference<List<GroupDTO>>(){});
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error reading groups: " + json, e);
             }
@@ -156,12 +151,12 @@ public class DataStore {
         return groups;
     }
 
-    public List<JoinRequestDTO> readJoinRequests() throws DataFormatException {
+    public List<JoinRequestDTO> readJoinRequests() throws IllegalArgumentException {
         List<JoinRequestDTO> joinRequests = new ArrayList<>();
         String json = readFileAsString(JOINREQUESTS_FILE_PATH);
         if (json != null) {
             try {
-                joinRequests = objectMapper.readValue(json,new TypeReference<List<JoinRequestDTO>>(){});
+                joinRequests = objectMapper.readValue(json, new TypeReference<List<JoinRequestDTO>>(){});
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error reading join requests: " + json, e);
             }
@@ -169,11 +164,19 @@ public class DataStore {
         return joinRequests;
     }
 
+    public void addJoinRequest(JoinRequestDTO joinRequestDTO) {
+        this.joinRequests.add(joinRequestDTO);
+    }
+
+    public void addGame(GameDTO gameDTO) {
+        this.games.add(gameDTO);
+    }
+
     public void writeResultToJSON() {
         writePlayersToJSON(users);
         writeGamesToJSON(games);
         writeGroupsToJSON(groups);
-        writejoinRequestsToJSON(joinRequests);
+        writeJoinRequestsToJSON(joinRequests);
     }
 
     private void writePlayersToJSON(List<UserDTO> players) {
@@ -200,16 +203,12 @@ public class DataStore {
         }
     }
 
-    private void writejoinRequestsToJSON(List<JoinRequestDTO> joinRequests) {
+    private void writeJoinRequestsToJSON(List<JoinRequestDTO> joinRequests) {
         if (joinRequests != null) {
             try {
                 objectMapper.writeValue(new File(JOINREQUESTS_FILE_PATH), joinRequests);
             } catch (Exception e ) { log.error("Error writing join requests...");}
         }
-    }
-
-    private Player toPlayer(UserDTO userDTO) {
-            return new Player();
     }
 
 }

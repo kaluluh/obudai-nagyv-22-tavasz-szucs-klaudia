@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameFormDTO {
+public class GameForm {
     private long id;
     private String name;
     private String description;
@@ -17,5 +17,4 @@ public class GameFormDTO {
     private int max;
     private int from;
     private int to;
-
 }

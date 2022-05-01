@@ -1,5 +1,7 @@
 package com.example.dto;
 
+import com.example.domain.GroupInfo;
+import com.example.domain.Player;
 import com.example.domain.Role;
 import lombok.Data;
 
@@ -8,12 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-public class PlayerDTO {
+public class PlayerDTO implements TransformableToDomainObject<Player>{
     private Long id;
     private String name;
-    private List<Long> gameIds;
-    private Long groupId;
-    private String groupName;
+    private GroupInfo groupInfo;
     private List<String> joinRequestedGroupName = new ArrayList<>();
     private List<UserDTO> joinRequests = new ArrayList<>();
     private List<Role> roles;
@@ -27,5 +27,15 @@ public class PlayerDTO {
     }
     public void addPlayerJoinRequest(UserDTO userDTO) {
         this.joinRequests.add(userDTO);
+    }
+
+    @Override
+    public Player toDomainObject() {
+        return Player.builder()
+                .id(id)
+                .name(name)
+                .roles(roles)
+                .groupInfo(groupInfo)
+                .build();
     }
 }

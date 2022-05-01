@@ -2,10 +2,9 @@ package com.example;
 
 import com.example.domain.JoinRequestState;
 import com.example.domain.MenuItem;
-import com.example.dto.Credentials;
-import com.example.dto.GameFormDTO;
-import com.example.dto.PlayerDTO;
-import com.example.dto.UserDTO;
+import com.example.domain.Player;
+import com.example.domain.User;
+import com.example.domain.Credentials;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,20 +18,20 @@ public class GameClubApplication implements CommandLineRunner {
     private final ConsoleView consoleView;
 
     public static void main(String[] args) {
-       SpringApplication.run(GameClubApplication.class, args);
+        SpringApplication.run(GameClubApplication.class, args);
     }
 
     @Override
     public void run(String... args) {
         Credentials credentials = consoleView.readCredentials();
         if (credentials != null) {
-            UserDTO user = gameClubService.authenticate(credentials);
+            User user = gameClubService.authenticate(credentials);
             if (user != null) {
                 consoleView.displayLogin(user);
-                PlayerDTO player = gameClubService.findUserData(user);
+                Player player = gameClubService.findUserData(user);
                 if (player != null) {
-                   consoleView.displayPlayer(player);
-                   showMainMenu(player);
+                    consoleView.displayPlayer(player);
+                    showMainMenu(player);
                 }
             } else {
                 consoleView.displayLoginFailure();
@@ -41,7 +40,7 @@ public class GameClubApplication implements CommandLineRunner {
 
     }
 
-    private void showMainMenu(PlayerDTO player) {
+    private void showMainMenu(Player player) {
         boolean showMenu = false;
         do {
             MenuItem menuItem = consoleView.startMenu(player);
@@ -58,16 +57,16 @@ public class GameClubApplication implements CommandLineRunner {
                 isBackToTheMenu = true;
                 break;
             case 2:
-               consoleView.displayOptionalGames(gameClubService.getAllOptionalGames());
-               boolean isSuccess = gameClubService.addingNewGame(consoleView.readingSelectedMenuNumber());
-               if (isSuccess) {
-                consoleView.displayGameSelected();
-               }
-               isBackToTheMenu = true;
+                consoleView.displayOptionalGames(gameClubService.getAllOptionalGames());
+                boolean isSuccess = gameClubService.addNewGame(consoleView.readingSelectedMenuNumber());
+                if (isSuccess) {
+                    consoleView.displayGameSelected();
+                }
+                isBackToTheMenu = true;
                 break;
             case 3:
                 consoleView.displayOptionalGroups(gameClubService.getOptionalGroups());
-                isSuccess = gameClubService.addingNewJoinRequest(consoleView.readingSelectedMenuNumber());
+                isSuccess = gameClubService.addJoinRequest(consoleView.readingSelectedMenuNumber());
                 if (isSuccess) {
                     consoleView.displayGroupSelected();
                 }

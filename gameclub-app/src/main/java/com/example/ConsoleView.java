@@ -1,10 +1,6 @@
 package com.example;
 
-import com.example.domain.Category;
-import com.example.domain.JoinRequestState;
-import com.example.domain.MenuItem;
-import com.example.domain.Role;
-import com.example.dto.*;
+import com.example.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -25,7 +21,7 @@ public class ConsoleView {
             System.out.println("\nPassword: ");
             String password = reader.readLine();
             if (name != null && password != null){
-              credentials = new Credentials(name,password);
+                credentials = new Credentials(name,password);
             }
 
         } catch (Exception e) {
@@ -34,18 +30,18 @@ public class ConsoleView {
         return credentials;
     }
 
-    public void displayLogin(UserDTO user) {
+    public void displayLogin(User user) {
         System.out.println("\nLogin successful.Your role(s): \n" );
         user.getRoles().forEach(r -> {
             System.out.println(r.toString());
         });
     }
 
-     public void displayLoginFailure() {
-         System.out.println("\nLogin failure, bye!");
-     }
+    public void displayLoginFailure() {
+        System.out.println("\nLogin failure, bye!");
+    }
 
-    public void displayPlayer(PlayerDTO player) {
+    public void displayPlayer(Player player) {
         String data = "";
 
         if (player.getRoles().contains(Role.GROUP_ADMIN)) {
@@ -79,8 +75,8 @@ public class ConsoleView {
         }
     }
 
-    public GameFormDTO displayNewGameForm () {
-        GameFormDTO gameFormDTO = null;
+    public GameForm displayNewGameForm () {
+        GameForm gameForm = null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please enter the required fields to the new game:\n");
         try {
@@ -102,21 +98,21 @@ public class ConsoleView {
             int from = Integer.parseInt(reader.readLine());
             System.out.println("\nTo:");
             int to = Integer.parseInt(reader.readLine());
-            gameFormDTO = new GameFormDTO(id,name,description,minimumAge,categories,min,max,from,to);
+            gameForm = new GameForm(id,name,description,minimumAge,categories,min,max,from,to);
         } catch (Exception e) {}
 
-        return gameFormDTO;
+        return gameForm;
     }
 
     public void displaySuccessGameAdding() {
         System.out.println("New game added successfully!\n");
     }
 
-    public void displayOptionalGames(List<GameDTO> optionalGames) {
+    public void displayOptionalGames(List<Game> optionalGames) {
         if (optionalGames.size() > 0) {
             String result = "";
             int id = 1;
-            for(GameDTO game : optionalGames) {
+            for(Game game : optionalGames) {
                 result += id + ". " + ( game.getName() != null ? game.getName() + "\n": "" );
                 id++;
             }
@@ -125,10 +121,10 @@ public class ConsoleView {
         }
     }
 
-    public void displayOptionalGroups(List<GroupDTO> optionalGroups) {
+    public void displayOptionalGroups(List<Group> optionalGroups) {
         String result = "";
         int id = 1;
-        for (GroupDTO group : optionalGroups) {
+        for (Group group : optionalGroups) {
             result += id + ". " + group.getName() + "\n";
             id++;
         }
@@ -136,9 +132,9 @@ public class ConsoleView {
         System.out.println(result);
     }
 
-    public void displayGameList (List<GameDTO> games) {
+    public void displayGameList (List<Game> games) {
         String result = "";
-        for (GameDTO game : games) {
+        for (Game game : games) {
             result += "\n- id: " + ( game.getId() != null ? game.getId().toString() : "N/A")  +
                     "\n\tName: "
                     + ( game.getName() != null ? game.getName() : "N/A") +
@@ -147,13 +143,13 @@ public class ConsoleView {
                     "\n\tCategories: "
                     + ( game.getCategories() != null ? getGameCategory(game.getCategories()) : "" ) +
                     "\n\tMinimum age: "
-                    + ( game.getMinimumAge()  != null ? game.getMinimumAge().toString() : "N/A" ) +
+                    + ( game.getMinimumAge() != 0 ? game.getMinimumAge() : "N/A" ) +
                     "\n\tNumber of players: "
                     + ( game.getNumberOfPlayers().getMin() != null ? game.getNumberOfPlayers().getMin().toString() + "min" : "N/A" )
                     + "-" + ( game.getNumberOfPlayers().getMax() != null ? game.getNumberOfPlayers().getMax().toString()  + "min" : "N/A" ) +
                     "\n\tPlay time: "
-                    + ( game.getPlayTime().getFrom() != null ? game.getPlayTime().getFrom() : "N/A" )
-                    + "-" + ( game.getPlayTime().getTo() != null ? game.getPlayTime().getTo().toString() : "N/A" );
+                    + ( game.getPlayTime().getMin() != null ? game.getPlayTime().getMin() : "N/A" )
+                    + "-" + ( game.getPlayTime().getMax() != null ? game.getPlayTime().getMax().toString() : "N/A" );
         }
         System.out.println(result);
     }
@@ -166,12 +162,12 @@ public class ConsoleView {
         System.out.println("Join request has been created.\n");
     }
 
-    public MenuItem startMenu(PlayerDTO player) {
+    public MenuItem startMenu(Player player) {
         MenuItem menuItem = null;
         if (player.getRoles().contains(Role.GROUP_ADMIN) && player.getRoles().contains(Role.PLAYER)) {
-             menuItem = getMenuItem(x -> consoleWriteGroupAdminMenu());
+            menuItem = getMenuItem(x -> consoleWriteGroupAdminMenu());
         } else if (player.getRoles().contains(Role.PLAYER) && player.getRoles().stream().count() == 1) {
-             menuItem = getMenuItem(x -> consoleWritePlayerMenu());
+            menuItem = getMenuItem(x -> consoleWritePlayerMenu());
         } else if (player.getRoles().contains(Role.SUPERUSER)) {
             menuItem = getMenuItem(x -> consoleWriteSuperUserMenu());
         }
@@ -214,12 +210,12 @@ public class ConsoleView {
         return result;
     }
 
-    public void displayJoinRequests (List<UserDTO> joinRequests) {
+    public void displayJoinRequests (List<JoinRequest> joinRequests) {
         if (joinRequests != null) {
             String result = "";
             int id = 1;
-            for (UserDTO userDTO : joinRequests) {
-                result += id + ". " + userDTO.getName() + "\n";
+            for (JoinRequest request : joinRequests) {
+                result += id + ". " + request.getPlayerName() + "\n";
                 id++;
             }
             result += id + ". Back to the menu.\n\n Please answer:";
@@ -235,7 +231,7 @@ public class ConsoleView {
         return result;
     }
 
-        private String getGameCategory (List<Category> categories) {
+    private String getGameCategory (List<Category> categories) {
         String result = "";
         for (Category category : categories) {
             result += category.toString() + " ";
@@ -274,36 +270,35 @@ public class ConsoleView {
         return menuItem;
     }
 
-    private String getPlayerData(PlayerDTO playerDTO) {
+    private String getPlayerData(Player player) {
         String result = "";
-        result = "\nHi " + ( playerDTO.getName() != null ? playerDTO.getName() : "N/A" ) + "!\n" +
-                "\n Your games :\n" + ( getGameNames(playerDTO.getGameNames()) != null ? getGameNames(playerDTO.getGameNames()) : "N/A" ) +
-                "\n Group membership: " + ( playerDTO.getGroupName() != null ? "\n- " + playerDTO.getGroupName() : "\nN/A" );
+        result = "\nHi " + (player.getName() != null ? player.getName() : "N/A") + "!\n" +
+                "\n Your games :\n" + ( getGameNames(player.getGames()) != null ? getGameNames(player.getGames()) : "N/A" ) +
+                "\n Group membership: " + ( player.getGroupInfo() != null ? "\n- " + player.getGroupInfo().getName() : "\nN/A" );
         return  result;
     }
 
-    private String getGroupAdminData(PlayerDTO playerDTO) {
+    private String getGroupAdminData(Player player) {
         String result = "";
-        result = "\nHi " + ( playerDTO.getName() != null ? playerDTO.getName() : "\nN/A" ) + "!\n" +
-                "\nYour group: " + ( playerDTO.getGroupName() != null ? "\n- " + playerDTO.getGroupName() : "\nN/A" ) +
-                "\n\nGroup join requests: \n" + ( getJoinRequests(playerDTO.getJoinRequestedGroupName()) != null ? getJoinRequests(playerDTO.getJoinRequestedGroupName()) : "N/A" ) +
-                "\n Your games :\n" +  ( getGameNames(playerDTO.getGameNames()) != null ? getGameNames(playerDTO.getGameNames()) : "N/A" )+
-                "\n Group membership: " + ( playerDTO.getGroupName() != null ? "\n- " + playerDTO.getGroupName() : "\nN/A" );
+        result = "\nHi " + (player.getName() != null ? player.getName() : "\nN/A") + "!\n" +
+                "\nGroup membership: " + ( player.getGroupInfo() != null ? "\n- " + player.getGroupInfo().getName() : "\nN/A" ) +
+                "\n\nGroup join requests: \n" + ( getJoinRequests(player.getJoinRequests()) != null ? getJoinRequests(player.getJoinRequests()) : "N/A" ) +
+                "\n Your games :\n" +  ( getGameNames(player.getGames()) != null ? getGameNames(player.getGames()) : "N/A" );
         return  result;
     }
 
-    private String getGameNames(List<String> gameNames) {
+    private String getGameNames(List<Game> games) {
         String result = "";
-        for (String name : gameNames) {
-            result += "- " + name + "\n";
+        for (Game game : games) {
+            result += "- " + game.getName() + "\n";
         }
         return  result;
     }
 
-    private String getJoinRequests(List<String> joinRequests) {
+    private String getJoinRequests(List<JoinRequest> joinRequests) {
         String result = "";
-        for (String name : joinRequests) {
-            result += "- " + name + "\n";
+        for (JoinRequest joinRequest : joinRequests) {
+            result += "- " + joinRequest.getPlayerName() + "\n";
         }
         return  result;
     }

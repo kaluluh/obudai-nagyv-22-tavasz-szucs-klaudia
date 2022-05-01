@@ -15,87 +15,106 @@ public class GameClubService {
 
     private final DataStore dataStore;
 
-    public UserDTO authenticate(Credentials credentials) {
+    public User authenticate(Credentials credentials) {
         UserDTO user = this.dataStore.getUsers()
                 .stream().filter(p ->
                         p.getLoginName().equals(credentials.getUserName()) &&
                                 p.getPassword().equals(credentials.getPassword()))
                 .findFirst()
                 .orElse(null);
-        return user;
+        return user == null ? null : user.toDomainObject();
     }
 
-    public PlayerDTO findUserData(UserDTO user) {
-        PlayerDTO player = new PlayerDTO();
+    private List<Game> getGamesForUser(UserDTO user) {
+        return dataStore.getGames().stream()
+                .filter(g -> user.getGames().contains(g.getId()))
+                .map(GameDTO::toDomainObject)
+                .collect(Collectors.toList());
+    }
+
+    private GroupInfo getGroupInfoForUser(UserDTO user) {
+        GroupDTO group = dataStore.getGroups().stream()
+                .filter(g -> g.getMembers().contains(user.getId()))
+                .findFirst().orElse(null);
+        return group != null ? new GroupInfo(group.getId(), group.getName()) : new GroupInfo(-1L, "N/A");
+    }
+
+    private List<JoinRequest> getJoinRequestsForPlayer(Player player) {
+        return dataStore.getJoinRequests().stream()
+                .filter(r -> r.getGroupId() == player.getGroupInfo().getId() && r.getState() == JoinRequestState.REQUESTED)
+                .map(r -> new JoinRequest(player.getId(), player.getName(), r.getState()))
+                .collect(Collectors.toList());
+    }
+
+    public Player findUserData(User user) {
+        Player player = new Player();
         player.setRoles(user.getRoles());
-        player.setGameIds(user.getGames());
         player.setId(user.getId());
         player.setName(user.getName());
 
-        this.dataStore.getGames().forEach( g -> {
-            player.getGameIds().forEach( u -> {
-                if (g.getId() == u) {
-                    player.getGames().add(g);
-                }
-            });
-        });
+        UserDTO userDTO = dataStore.getUsers().stream()
+                .filter(u -> user.getId() == u.getId()).findFirst().get();
 
-        this.dataStore.getGroups().forEach( g -> {
-            g.getMembers().forEach( m -> {
-                if (m == player.getId()){
-                    player.setGroupName(g.getName());
-                    player.setGroupId(g.getId());
-                }
-            });
-        });
+        player.setGames(getGamesForUser(userDTO));
+        player.setGroupInfo(getGroupInfoForUser(userDTO));
 
-        List<JoinRequestDTO> joinRequestList = this.dataStore.getJoinRequests().stream().filter(j ->
-                j.getGroupId() ==  player.getGroupId() && j.getState() == JoinRequestState.REQUESTED)
-                .collect(Collectors.toList());
-
-        if (joinRequestList != null){
-            joinRequestList.forEach( j -> {
-                this.dataStore.getUsers().forEach(p -> {
-                    if (j.getUserId() == p.getId()) {
-                        player.addPlayerName(p.getName());
-                        player.addPlayerJoinRequest(p);
-                    }
-                });
-            });
+        if (player.getRoles().contains(Role.GROUP_ADMIN)) {
+            player.setJoinRequests(getJoinRequestsForPlayer(player));
         }
-        this.dataStore.setPlayer(player);
+
+        this.dataStore.setCurrentPlayer(player);
+
         return player;
     }
 
-    public List<GameDTO> getGameList() {
-        return this.dataStore.getGames();
+    public List<Game> getGameList() {
+        return this.dataStore.getGames().stream()
+                .map(GameDTO::toDomainObject)
+                .collect(Collectors.toList());
     }
 
-    public List<GameDTO> getAllOptionalGames() {
+    public List<Game> getAllOptionalGames() {
         List<GameDTO> optionalGames = new ArrayList<>(this.dataStore.getGames());
-        if (this.dataStore.getPlayer().getGames() != null) {
-            optionalGames.removeAll(this.dataStore.getPlayer().getGames());
+        if (this.dataStore.getCurrentPlayer().getGames() != null) {
+            optionalGames.removeAll(this.dataStore.getCurrentPlayer().getGames());
         }
-        return optionalGames;
+        return optionalGames.stream()
+                .map(GameDTO::toDomainObject)
+                .collect(Collectors.toList());
     }
 
-    public boolean addingNewGame(int selectedNumber) {
-        int size = getAllOptionalGames().size();
+    public boolean addNewGame(int selectedNumber) {
+        List<Game> optionalGames = getAllOptionalGames();
         boolean isSuccess = false;
-         if (selectedNumber > size) {
-         } else {
-             GameDTO selectedGame = getAllOptionalGames().get(selectedNumber - 1);
-             this.dataStore.getPlayer().getGameIds().add(selectedGame.getId());
-             this.dataStore.getGames().add(selectedGame);
-             isSuccess = true;
-         }
-         return isSuccess;
+        if (selectedNumber > optionalGames.size()) {
+        } else {
+            Game selectedGame = getAllOptionalGames().get(selectedNumber - 1);
+            this.dataStore.getCurrentPlayer().getGames().add(selectedGame);
+            // Szerintem ez nem kell mert csak az aktualis player jatekaihoz kell hozzaadni
+//             this.dataStore.addGame(GameDTO.builder()
+//                             .id(selectedGame.getId())
+//                             .name(selectedGame.getName())
+//                             .description(selectedGame.getDescription())
+//                             .minimumAge(selectedGame.getMinimumAge())
+//                             .categories(selectedGame.getCategories())
+//                             .numberOfPlayers(selectedGame.getNumberOfPlayers())
+//                             .playTime(new LimitsDTO(selectedGame.getPlayTime().getMin(), selectedGame.getPlayTime().getMax()))
+//                             .build());
+            isSuccess = true;
+        }
+        return isSuccess;
     }
 
-    public List<GroupDTO> getOptionalGroups() {
+    public List<Group> getOptionalGroups() {
+        return getOptionalGroupsInternal().stream()
+                .map(GroupDTO::toDomainObject)
+                .collect(Collectors.toList());
+    }
+
+    private List<GroupDTO> getOptionalGroupsInternal() {
         List<GroupDTO> optionalGroups = new ArrayList<>(this.dataStore.getGroups());
         GroupDTO existedGroup = optionalGroups
-                .stream().filter(g -> g.getId() == this.dataStore.getPlayer().getGroupId())
+                .stream().filter(g -> g.getId() == this.dataStore.getCurrentPlayer().getGroupInfo().getId())
                 .findFirst()
                 .orElse(null);
         if (existedGroup != null) {
@@ -104,49 +123,41 @@ public class GameClubService {
         return optionalGroups;
     }
 
-    public boolean addingNewJoinRequest(int selectedNumber) {
-        int size = getOptionalGroups().size();
+    public boolean addJoinRequest(int selectedNumber) {
+        int size = getOptionalGroupsInternal().size();
         boolean isSuccess = false;
-        if (selectedNumber > size) {
-
-        } else {
-            GroupDTO selectedGroup = getOptionalGroups().get(selectedNumber - 1);
-            this.dataStore.getJoinRequests()
-                    .add(new JoinRequestDTO(this.dataStore.getPlayer().getId(),
-                            selectedGroup.getId(),
-                            JoinRequestState.REQUESTED));
+        if (selectedNumber < size) {
+            GroupDTO selectedGroup = getOptionalGroupsInternal().get(selectedNumber - 1);
+            this.dataStore.addJoinRequest(new JoinRequestDTO(this.dataStore.getCurrentPlayer().getId(),
+                    selectedGroup.getId(),
+                    JoinRequestState.REQUESTED));
             isSuccess = true;
         }
         return isSuccess;
     }
 
-    public List<UserDTO> getJoinRequests () {
-        return this.dataStore.getPlayer().getJoinRequests();
+    public List<JoinRequest> getJoinRequests() {
+        return this.dataStore.getCurrentPlayer().getJoinRequests();
     }
 
-    public JoinRequestState proccessSelectedJoinRequests(String selectedJoinRequest) {
+    public JoinRequestState proccessSelectedJoinRequests(String joinRequestId) {
         JoinRequestState state = JoinRequestState.REQUESTED;
         int index = 0;
-        if (selectedJoinRequest.contains("A") || selectedJoinRequest.contains("R")) {
-            index =  Integer.parseInt(selectedJoinRequest.substring(0,selectedJoinRequest.length() - 1));
+        if (joinRequestId.contains("A") || joinRequestId.contains("R")) {
+            index =  Integer.parseInt(joinRequestId.substring(0,joinRequestId.length() - 1));
         } else {
-            index =  Integer.parseInt(selectedJoinRequest);
+            index =  Integer.parseInt(joinRequestId);
         }
         if ( index > getJoinRequests().size()) {
         } else {
-            if(selectedJoinRequest.contains("A")) {
-                UserDTO selectedPlayer  = getJoinRequests().get(index - 1);
-                this.dataStore.getJoinRequests().add(new JoinRequestDTO(selectedPlayer.getId(),
-                        this.dataStore.getPlayer().getGroupId(),
-                        JoinRequestState.ACCEPTED));
+            JoinRequest joinRequest = getJoinRequests().get(index - 1);
+            if (joinRequestId.contains("A")) {
                 state = JoinRequestState.ACCEPTED;
-            } else if (selectedJoinRequest.contains("R")) {
-                UserDTO selectedPlayer  = getJoinRequests().get(index - 1);
-                this.dataStore.getJoinRequests().add(new JoinRequestDTO(selectedPlayer.getId(),
-                        this.dataStore.getPlayer().getGroupId(),
-                        JoinRequestState.REJECTED));
+            } else if (joinRequestId.contains("R")) {
                 state = JoinRequestState.REJECTED;
             }
+            dataStore.addJoinRequest(new JoinRequestDTO(joinRequest.getPlayerId(),
+                    this.dataStore.getCurrentPlayer().getGroupInfo().getId(), state));
         }
         return state;
     }
@@ -155,27 +166,27 @@ public class GameClubService {
         this.dataStore.writeResultToJSON();
     }
 
-    public boolean addNewGame(GameFormDTO gameFormDTO) {
-        boolean isSucces = false;
+    public boolean addNewGame(GameForm gameForm) {
+        boolean success = false;
         List<Category> categoriesList = new ArrayList<>();
-        if (gameFormDTO.getCategories().contains(",")) {
-            String[] categoriesArray = gameFormDTO.getCategories().split(",");
+        if (gameForm.getCategories().contains(",")) {
+            String[] categoriesArray = gameForm.getCategories().split(",");
             for (String category: categoriesArray) {
                 categoriesList.add(Category.valueOf(category));
             }
         } else {
-            categoriesList.add(Category.valueOf(gameFormDTO.getCategories()));
+            categoriesList.add(Category.valueOf(gameForm.getCategories()));
         }
 
-        this.dataStore.getGames().add(
-                new GameDTO(gameFormDTO.getId(),gameFormDTO.getName(),gameFormDTO.getDescription(),gameFormDTO.getMinimumAge(),categoriesList,
-                new LimitsDTO(gameFormDTO.getMin(),gameFormDTO.getMax()),
-                new Limits(gameFormDTO.getFrom(),gameFormDTO.getTo())));
+        this.dataStore.addGame(
+                new GameDTO(gameForm.getId(), gameForm.getName(), gameForm.getDescription(), gameForm.getMinimumAge(),categoriesList,
+                        new LimitsDTO(gameForm.getMin(), gameForm.getMax()),
+                        new Limits(gameForm.getFrom(), gameForm.getTo())));
 
-        if (this.dataStore.getGames().stream().anyMatch(g->g.getId() == gameFormDTO.getId())) {
-            isSucces = true;
+        if (this.dataStore.getGames().stream().anyMatch(g->g.getId() == gameForm.getId())) {
+            success = true;
         }
-        return isSucces;
+        return success;
     }
 
 }
