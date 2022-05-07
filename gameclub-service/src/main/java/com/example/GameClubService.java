@@ -1,146 +1,128 @@
 package com.example;
 
 import com.example.domain.*;
-import com.example.dto.*;
+import com.example.entity.Group;
+import com.example.entity.JoinRequestId;
+import com.example.entity.Player;
+import com.example.repository.GameRepository;
+import com.example.repository.GroupRepository;
+import com.example.repository.JoinRequestRepository;
+import com.example.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class GameClubService {
 
-    private final DataStore dataStore;
+    private final GameRepository gameRepository;
+    private final GroupRepository groupRepository;
+    private final JoinRequestRepository joinRequestRepository;
+    private final PlayerRepository playerRepository;
 
-    public User authenticate(Credentials credentials) {
-        UserDTO user = this.dataStore.getUsers()
-                .stream().filter(p ->
-                        p.getLoginName().equals(credentials.getUserName()) &&
-                                p.getPassword().equals(credentials.getPassword()))
-                .findFirst()
-                .orElse(null);
-        return user == null ? null : user.toDomainObject();
-    }
-
-    private List<Game> getGamesForUser(UserDTO user) {
-        return dataStore.getGames().stream()
-                .filter(g -> user.getGames().contains(g.getId()))
-                .map(GameDTO::toDomainObject)
-                .collect(Collectors.toList());
-    }
-
-    private GroupInfo getGroupInfoForUser(UserDTO user) {
-        GroupDTO group = dataStore.getGroups().stream()
-                .filter(g -> g.getMembers().contains(user.getId()))
-                .findFirst().orElse(null);
-        return group != null ? new GroupInfo(group.getId(), group.getName()) : new GroupInfo(-1L, "N/A");
-    }
-
-    private List<JoinRequest> getJoinRequestsForPlayer(Player player) {
-        return dataStore.getJoinRequests().stream()
-                .filter(r -> r.getGroupId() == player.getGroupInfo().getId() && r.getState() == JoinRequestState.REQUESTED)
-                .map(r -> new JoinRequest(player.getId(), player.getName(), r.getState()))
-                .collect(Collectors.toList());
-    }
-
-    public Player findUserData(User user) {
-        Player player = new Player();
-        player.setRoles(user.getRoles());
-        player.setId(user.getId());
-        player.setName(user.getName());
-
-        UserDTO userDTO = dataStore.getUsers().stream()
-                .filter(u -> user.getId() == u.getId()).findFirst().get();
-
-        player.setGames(getGamesForUser(userDTO));
-        player.setGroupInfo(getGroupInfoForUser(userDTO));
-
-        if (player.getRoles().contains(Role.GROUP_ADMIN)) {
-            player.setJoinRequests(getJoinRequestsForPlayer(player));
+    public com.example.entity.Player authenticate(Credentials credentials) {
+        com.example.entity.Player player = playerRepository.findByLoginNameAndPassword(credentials.getUserName(), credentials.getPassword());
+        // Lazy loaded collections need to be initialized, for this I'm using a toString call
+        if (player != null) {
+            player.getGames().toString();
+            player.getRoles().toString();
+            MetaData.currentPlayer = player;
         }
-
-        this.dataStore.setCurrentPlayer(player);
-
         return player;
     }
 
-    public List<Game> getGameList() {
-        return this.dataStore.getGames().stream()
-                .map(GameDTO::toDomainObject)
-                .collect(Collectors.toList());
+    public Group getGroupForAdmin(Player player) {
+        com.example.entity.Group group = groupRepository.findByAdmin(player);
+        // Lazy loaded collections need to be initialized, for this I'm using a toString call
+        group.toString();
+        MetaData.currentPlayerGroup = group;
+        return group;
     }
 
-    public List<Game> getAllOptionalGames() {
-        List<GameDTO> optionalGames = new ArrayList<>(this.dataStore.getGames());
-        if (this.dataStore.getCurrentPlayer().getGames() != null) {
-            optionalGames.removeAll(this.dataStore.getCurrentPlayer().getGames());
-        }
-        return optionalGames.stream()
-                .map(GameDTO::toDomainObject)
-                .collect(Collectors.toList());
+    public com.example.entity.Group getGroupForPlayer(com.example.entity.Player player) {
+        com.example.entity.Group group = groupRepository.findByPlayer(player);
+        // Lazy loaded collections need to be initialized, for this I'm using a toString call
+        group.toString();
+        MetaData.currentPlayerGroup = group;
+        return group;
+    }
+
+    public List<com.example.entity.Game> getGameList() {
+        List<com.example.entity.Game> games = (ArrayList<com.example.entity.Game>)gameRepository.findAll();
+        // Lazy loaded collection need to be initialized, for this I'm using a toString call
+        games.toString();
+        return games;
+    }
+
+    public List<com.example.entity.Game> getGamesNotOwnedByPlayer() {
+        List<com.example.entity.Game> games = getGameList();
+        games.removeAll(MetaData.currentPlayer.getGames());
+        return games;
+    }
+
+    public List<com.example.entity.Game> getAllOptionalGames() {
+        return getGamesNotOwnedByPlayer();
     }
 
     public boolean addNewGame(int selectedNumber) {
-        List<Game> optionalGames = getAllOptionalGames();
-        boolean isSuccess = false;
-        if (selectedNumber > optionalGames.size()) {
+        List<com.example.entity.Game> optionalGames = getGamesNotOwnedByPlayer();
+        boolean success = false;
+        if (selectedNumber < 0 && selectedNumber <= optionalGames.size()) {
         } else {
-            Game selectedGame = getAllOptionalGames().get(selectedNumber - 1);
-            this.dataStore.getCurrentPlayer().getGames().add(selectedGame);
-            // Szerintem ez nem kell mert csak az aktualis player jatekaihoz kell hozzaadni
-//             this.dataStore.addGame(GameDTO.builder()
-//                             .id(selectedGame.getId())
-//                             .name(selectedGame.getName())
-//                             .description(selectedGame.getDescription())
-//                             .minimumAge(selectedGame.getMinimumAge())
-//                             .categories(selectedGame.getCategories())
-//                             .numberOfPlayers(selectedGame.getNumberOfPlayers())
-//                             .playTime(new LimitsDTO(selectedGame.getPlayTime().getMin(), selectedGame.getPlayTime().getMax()))
-//                             .build());
-            isSuccess = true;
+            com.example.entity.Game selectedGame = optionalGames.get(selectedNumber - 1);
+            MetaData.currentPlayer.getGames().add(selectedGame);
+            try {
+                playerRepository.save(MetaData.currentPlayer);
+                success = true;
+            } catch (Exception e) {
+                log.error("Error saving game", e);
+            }
         }
-        return isSuccess;
+        return success;
     }
 
-    public List<Group> getOptionalGroups() {
-        return getOptionalGroupsInternal().stream()
-                .map(GroupDTO::toDomainObject)
-                .collect(Collectors.toList());
-    }
-
-    private List<GroupDTO> getOptionalGroupsInternal() {
-        List<GroupDTO> optionalGroups = new ArrayList<>(this.dataStore.getGroups());
-        GroupDTO existedGroup = optionalGroups
-                .stream().filter(g -> g.getId() == this.dataStore.getCurrentPlayer().getGroupInfo().getId())
-                .findFirst()
-                .orElse(null);
-        if (existedGroup != null) {
-            optionalGroups.remove(existedGroup);
-        }
-        return optionalGroups;
+    public List<com.example.entity.Group> getJoinableGroups() {
+        List<com.example.entity.Group> groups = (List<com.example.entity.Group>)groupRepository.findAll();
+        groups.remove(MetaData.currentPlayerGroup);
+        return groups;
     }
 
     public boolean addJoinRequest(int selectedNumber) {
-        int size = getOptionalGroupsInternal().size();
-        boolean isSuccess = false;
-        if (selectedNumber < size) {
-            GroupDTO selectedGroup = getOptionalGroupsInternal().get(selectedNumber - 1);
-            this.dataStore.addJoinRequest(new JoinRequestDTO(this.dataStore.getCurrentPlayer().getId(),
-                    selectedGroup.getId(),
-                    JoinRequestState.REQUESTED));
-            isSuccess = true;
+        List<com.example.entity.Group> groups = getJoinableGroups();
+        boolean success = false;
+        if (selectedNumber < groups.size()) {
+            com.example.entity.Group selectedGroup = groups.get(selectedNumber - 1);
+            JoinRequestId joinRequestId = new JoinRequestId(MetaData.currentPlayer.getId(), selectedGroup.getId());
+            try {
+                joinRequestRepository.save(new com.example.entity.JoinRequest(joinRequestId, JoinRequestState.REQUESTED));
+                success = true;
+            } catch (Exception e) {
+                log.error("Error saving join request", e);
+            }
         }
-        return isSuccess;
+        return success;
     }
 
-    public List<JoinRequest> getJoinRequests() {
-        return this.dataStore.getCurrentPlayer().getJoinRequests();
+    public List<com.example.entity.JoinRequest> getJoinRequests() {
+        return MetaData.currentPlayerGroup.getJoinRequests();
     }
 
-    public JoinRequestState proccessSelectedJoinRequests(String joinRequestId) {
+    public List<String> getJoinRequestPlayerNames() {
+        List<com.example.entity.Player> players = (List<com.example.entity.Player>)playerRepository.findAllById(
+                MetaData.currentPlayerGroup.getJoinRequests().stream()
+                .map(r -> r.getJoinRequestId().getPlayerId()).collect(Collectors.toList()));
+        return players.stream().map(p -> p.getName()).collect(Collectors.toList());
+    }
+
+    public JoinRequestState processSelectedJoinRequests(String joinRequestId) {
         JoinRequestState state = JoinRequestState.REQUESTED;
         int index = 0;
         if (joinRequestId.contains("A") || joinRequestId.contains("R")) {
@@ -150,42 +132,53 @@ public class GameClubService {
         }
         if ( index > getJoinRequests().size()) {
         } else {
-            JoinRequest joinRequest = getJoinRequests().get(index - 1);
+            com.example.entity.JoinRequest joinRequest = getJoinRequests().get(index - 1);
             if (joinRequestId.contains("A")) {
                 state = JoinRequestState.ACCEPTED;
             } else if (joinRequestId.contains("R")) {
                 state = JoinRequestState.REJECTED;
             }
-            dataStore.addJoinRequest(new JoinRequestDTO(joinRequest.getPlayerId(),
-                    this.dataStore.getCurrentPlayer().getGroupInfo().getId(), state));
+            try {
+                joinRequest.setJoinRequestState(state);
+                joinRequestRepository.save(joinRequest);
+                MetaData.currentPlayerGroup.getJoinRequests().remove(joinRequest);
+            } catch (Exception e) {
+                log.error("Error handling join request", e);
+            }
         }
         return state;
     }
 
     public void quitApplication() {
-        this.dataStore.writeResultToJSON();
+        System.exit(0);
     }
 
     public boolean addNewGame(GameForm gameForm) {
         boolean success = false;
-        List<Category> categoriesList = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
         if (gameForm.getCategories().contains(",")) {
             String[] categoriesArray = gameForm.getCategories().split(",");
             for (String category: categoriesArray) {
-                categoriesList.add(Category.valueOf(category));
+                categories.add(Category.valueOf(category));
             }
         } else {
-            categoriesList.add(Category.valueOf(gameForm.getCategories()));
+            categories.add(Category.valueOf(gameForm.getCategories()));
         }
-
-        this.dataStore.addGame(
-                new GameDTO(gameForm.getId(), gameForm.getName(), gameForm.getDescription(), gameForm.getMinimumAge(),categoriesList,
-                        new LimitsDTO(gameForm.getMin(), gameForm.getMax()),
-                        new Limits(gameForm.getFrom(), gameForm.getTo())));
-
-        if (this.dataStore.getGames().stream().anyMatch(g->g.getId() == gameForm.getId())) {
+        com.example.entity.Game game = com.example.entity.Game.builder()
+                .name(gameForm.getName())
+                .description(gameForm.getDescription())
+                .minimumAge(gameForm.getMinimumAge())
+                .categories(categories)
+                .playTime(new com.example.entity.Limits(gameForm.getMin(), gameForm.getMax()))
+                .numberOfPlayers(new com.example.entity.Limits(gameForm.getFrom(), gameForm.getTo()))
+                .build();
+        try {
+            gameRepository.save(game);
             success = true;
+        } catch (Exception e) {
+            log.error("Error saving game", e);
         }
+
         return success;
     }
 

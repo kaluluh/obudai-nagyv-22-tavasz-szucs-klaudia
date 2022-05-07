@@ -2,14 +2,20 @@ package com.example;
 
 import com.example.domain.JoinRequestState;
 import com.example.domain.MenuItem;
-import com.example.domain.Player;
-import com.example.domain.User;
 import com.example.domain.Credentials;
+import com.example.domain.Role;
+import com.example.entity.Group;
+import com.example.entity.Player;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.List;
+
+
+@EnableTransactionManagement
 @SpringBootApplication
 @RequiredArgsConstructor
 public class GameClubApplication implements CommandLineRunner {
@@ -25,14 +31,19 @@ public class GameClubApplication implements CommandLineRunner {
     public void run(String... args) {
         Credentials credentials = consoleView.readCredentials();
         if (credentials != null) {
-            User user = gameClubService.authenticate(credentials);
-            if (user != null) {
-                consoleView.displayLogin(user);
-                Player player = gameClubService.findUserData(user);
-                if (player != null) {
-                    consoleView.displayPlayer(player);
-                    showMainMenu(player);
+            com.example.entity.Player player = gameClubService.authenticate(credentials);
+            if (player != null) {
+                consoleView.displayLogin(player);
+                Group group;
+                if (player.getRoles().contains(Role.GROUP_ADMIN)) {
+                    group = gameClubService.getGroupForAdmin(player);
+                    List<String> joinRequestNames = gameClubService.getJoinRequestPlayerNames();
+                    consoleView.displayAdmin(player, group, joinRequestNames);
+                } else {
+                    group = gameClubService.getGroupForPlayer(player);
+                    consoleView.displayPlayer(player, group);
                 }
+                showMainMenu(player);
             } else {
                 consoleView.displayLoginFailure();
             }
@@ -65,7 +76,7 @@ public class GameClubApplication implements CommandLineRunner {
                 isBackToTheMenu = true;
                 break;
             case 3:
-                consoleView.displayOptionalGroups(gameClubService.getOptionalGroups());
+                consoleView.displayJoinableGroups(gameClubService.getJoinableGroups());
                 isSuccess = gameClubService.addJoinRequest(consoleView.readingSelectedMenuNumber());
                 if (isSuccess) {
                     consoleView.displayGroupSelected();
@@ -73,8 +84,8 @@ public class GameClubApplication implements CommandLineRunner {
                 isBackToTheMenu = true;
                 break;
             case 4:
-                consoleView.displayJoinRequests(gameClubService.getJoinRequests());
-                JoinRequestState state = gameClubService.proccessSelectedJoinRequests(consoleView.readingSelectedJoinRequest());
+                consoleView.displayJoinRequests(gameClubService.getJoinRequestPlayerNames());
+                JoinRequestState state = gameClubService.processSelectedJoinRequests(consoleView.readingSelectedJoinRequest());
                 consoleView.displayJoinRequestState(state);
                 isBackToTheMenu = true;
                 break;

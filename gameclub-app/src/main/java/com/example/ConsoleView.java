@@ -1,6 +1,9 @@
 package com.example;
 
 import com.example.domain.*;
+import com.example.entity.Game;
+import com.example.entity.Group;
+import com.example.entity.Player;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -30,7 +33,7 @@ public class ConsoleView {
         return credentials;
     }
 
-    public void displayLogin(User user) {
+    public void displayLogin(com.example.entity.User user) {
         System.out.println("\nLogin successful.Your role(s): \n" );
         user.getRoles().forEach(r -> {
             System.out.println(r.toString());
@@ -41,15 +44,12 @@ public class ConsoleView {
         System.out.println("\nLogin failure, bye!");
     }
 
-    public void displayPlayer(Player player) {
-        String data = "";
+    public void displayAdmin(Player player, Group playerGroup, List<String> joinRequestNames) {
+       System.out.println(getGroupAdminData(player, playerGroup, joinRequestNames));
+    }
 
-        if (player.getRoles().contains(Role.GROUP_ADMIN)) {
-            data = getGroupAdminData(player);
-        } else {
-            data = getPlayerData(player);
-        }
-        System.out.println(data);
+    public void displayPlayer(com.example.entity.Player player, com.example.entity.Group playerGroup) {
+       System.out.println(getPlayerData(player, playerGroup.getName()));
     }
 
     public void displayMenuPoint (MenuItem menuItem) {
@@ -108,11 +108,11 @@ public class ConsoleView {
         System.out.println("New game added successfully!\n");
     }
 
-    public void displayOptionalGames(List<Game> optionalGames) {
+    public void displayOptionalGames(List<com.example.entity.Game> optionalGames) {
         if (optionalGames.size() > 0) {
             String result = "";
             int id = 1;
-            for(Game game : optionalGames) {
+            for(com.example.entity.Game game : optionalGames) {
                 result += id + ". " + ( game.getName() != null ? game.getName() + "\n": "" );
                 id++;
             }
@@ -121,10 +121,10 @@ public class ConsoleView {
         }
     }
 
-    public void displayOptionalGroups(List<Group> optionalGroups) {
+    public void displayJoinableGroups(List<com.example.entity.Group> optionalGroups) {
         String result = "";
         int id = 1;
-        for (Group group : optionalGroups) {
+        for (com.example.entity.Group group : optionalGroups) {
             result += id + ". " + group.getName() + "\n";
             id++;
         }
@@ -132,9 +132,9 @@ public class ConsoleView {
         System.out.println(result);
     }
 
-    public void displayGameList (List<Game> games) {
+    public void displayGameList(List<com.example.entity.Game> games) {
         String result = "";
-        for (Game game : games) {
+        for (com.example.entity.Game game : games) {
             result += "\n- id: " + ( game.getId() != null ? game.getId().toString() : "N/A")  +
                     "\n\tName: "
                     + ( game.getName() != null ? game.getName() : "N/A") +
@@ -145,11 +145,11 @@ public class ConsoleView {
                     "\n\tMinimum age: "
                     + ( game.getMinimumAge() != 0 ? game.getMinimumAge() : "N/A" ) +
                     "\n\tNumber of players: "
-                    + ( game.getNumberOfPlayers().getMin() != null ? game.getNumberOfPlayers().getMin().toString() + "min" : "N/A" )
-                    + "-" + ( game.getNumberOfPlayers().getMax() != null ? game.getNumberOfPlayers().getMax().toString()  + "min" : "N/A" ) +
+                    + ( game.getNumberOfPlayers().getMinimum() != null ? game.getNumberOfPlayers().getMinimum().toString() + "min" : "N/A" )
+                    + "-" + ( game.getNumberOfPlayers().getMaximum() != null ? game.getNumberOfPlayers().getMaximum().toString()  + "min" : "N/A" ) +
                     "\n\tPlay time: "
-                    + ( game.getPlayTime().getMin() != null ? game.getPlayTime().getMin() : "N/A" )
-                    + "-" + ( game.getPlayTime().getMax() != null ? game.getPlayTime().getMax().toString() : "N/A" );
+                    + ( game.getPlayTime().getMinimum() != null ? game.getPlayTime().getMinimum() : "N/A" )
+                    + "-" + ( game.getPlayTime().getMaximum() != null ? game.getPlayTime().getClass().toString() : "N/A" );
         }
         System.out.println(result);
     }
@@ -162,7 +162,7 @@ public class ConsoleView {
         System.out.println("Join request has been created.\n");
     }
 
-    public MenuItem startMenu(Player player) {
+    public MenuItem startMenu(com.example.entity.Player player) {
         MenuItem menuItem = null;
         if (player.getRoles().contains(Role.GROUP_ADMIN) && player.getRoles().contains(Role.PLAYER)) {
             menuItem = getMenuItem(x -> consoleWriteGroupAdminMenu());
@@ -210,12 +210,12 @@ public class ConsoleView {
         return result;
     }
 
-    public void displayJoinRequests (List<JoinRequest> joinRequests) {
-        if (joinRequests != null) {
+    public void displayJoinRequests(List<String> joinRequestPlayerNames) {
+        if (joinRequestPlayerNames != null) {
             String result = "";
             int id = 1;
-            for (JoinRequest request : joinRequests) {
-                result += id + ". " + request.getPlayerName() + "\n";
+            for (String playerName : joinRequestPlayerNames) {
+                result += id + ". " + playerName + "\n";
                 id++;
             }
             result += id + ". Back to the menu.\n\n Please answer:";
@@ -270,35 +270,35 @@ public class ConsoleView {
         return menuItem;
     }
 
-    private String getPlayerData(Player player) {
+    private String getPlayerData(com.example.entity.Player player, String groupName) {
         String result = "";
         result = "\nHi " + (player.getName() != null ? player.getName() : "N/A") + "!\n" +
-                "\n Your games :\n" + ( getGameNames(player.getGames()) != null ? getGameNames(player.getGames()) : "N/A" ) +
-                "\n Group membership: " + ( player.getGroupInfo() != null ? "\n- " + player.getGroupInfo().getName() : "\nN/A" );
+                "\n Your games :\n" + (getGameNames(player.getGames()) != null ? getGameNames(player.getGames()) : "N/A") +
+                "\n Group membership: " + (groupName != null ? "\n- " + groupName : "\nN/A");
         return  result;
     }
 
-    private String getGroupAdminData(Player player) {
+    private String getGroupAdminData(com.example.entity.Player player, com.example.entity.Group playerGroup, List<String> joinRequestPlayerNames) {
         String result = "";
         result = "\nHi " + (player.getName() != null ? player.getName() : "\nN/A") + "!\n" +
-                "\nGroup membership: " + ( player.getGroupInfo() != null ? "\n- " + player.getGroupInfo().getName() : "\nN/A" ) +
-                "\n\nGroup join requests: \n" + ( getJoinRequests(player.getJoinRequests()) != null ? getJoinRequests(player.getJoinRequests()) : "N/A" ) +
+                "\nGroup membership: " + (playerGroup != null ? "\n- " + playerGroup.getName() : "\nN/A" ) +
+                "\n\nGroup join requests: \n" + (joinRequestPlayerNames != null ? getJoinRequests(joinRequestPlayerNames) : "N/A" ) +
                 "\n Your games :\n" +  ( getGameNames(player.getGames()) != null ? getGameNames(player.getGames()) : "N/A" );
         return  result;
     }
 
-    private String getGameNames(List<Game> games) {
+    private String getGameNames(List<com.example.entity.Game> games) {
         String result = "";
-        for (Game game : games) {
+        for (com.example.entity.Game game : games) {
             result += "- " + game.getName() + "\n";
         }
         return  result;
     }
 
-    private String getJoinRequests(List<JoinRequest> joinRequests) {
+    private String getJoinRequests(List<String> joinRequestPlayerNames) {
         String result = "";
-        for (JoinRequest joinRequest : joinRequests) {
-            result += "- " + joinRequest.getPlayerName() + "\n";
+        for (String playerName : joinRequestPlayerNames) {
+            result += "- " + playerName + "\n";
         }
         return  result;
     }

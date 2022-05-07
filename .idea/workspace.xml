@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
+    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="soma changes">
+      <change afterPath="$PROJECT_DIR$/gameclub-app/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/MetaData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/TestDataGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Group.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequestId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Limits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/GameRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/GroupRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/JoinRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/PlayerRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +88,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="4b5b740c420725021b32652aca3d97e27b9a172e" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -100,7 +124,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gameclub-app/src/test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -113,36 +137,18 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/gameclub-persistence/src/test/resources" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.repository" />
+      <recent name="com.example.entity" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="gradle clean" />
       <command value="gradle build" />
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.GameClub">
-    <configuration name="PlayerActionTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":gameclub-app:test" />
-            <option value="--tests" />
-            <option value="&quot;PlayerActionTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="PlayerActionTest.loadingFiles (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -212,6 +218,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="obudai-nagyv-22-tavasz-szucs-klaudia [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -242,11 +269,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [build]" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [clean]" />
         <item itemvalue="Gradle.PlayerActionTest.shouldLogin (1)" />
         <item itemvalue="Gradle.PlayerActionTest.shouldLogin (2)" />
         <item itemvalue="Gradle.PlayerActionTest.loadingFiles (1)" />
-        <item itemvalue="Gradle.PlayerActionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -287,7 +314,16 @@
       <workItem from="1651405742221" duration="316000" />
       <workItem from="1651406133154" duration="1865000" />
       <workItem from="1651408732669" duration="4000" />
-      <workItem from="1651408758445" duration="97000" />
+      <workItem from="1651408758445" duration="1184000" />
+      <workItem from="1651415507480" duration="79000" />
+      <workItem from="1651415607168" duration="237000" />
+      <workItem from="1651415932048" duration="460000" />
+      <workItem from="1651416620029" duration="179000" />
+      <workItem from="1651416804931" duration="23000" />
+      <workItem from="1651416859314" duration="99000" />
+      <workItem from="1651417005739" duration="887000" />
+      <workItem from="1651614741011" duration="409000" />
+      <workItem from="1651909323086" duration="24549000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -338,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651408641473</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="soma changes">
+      <created>1651408868871</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1651408868871</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,9 +409,24 @@
     <MESSAGE value="Some changes" />
     <MESSAGE value="Soma changes" />
     <MESSAGE value="Added transformations between domain and dto objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added transformations between domain and dto objects" />
+    <MESSAGE value="soma changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="soma changes" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.example.dto.GameFormDTO" memberName="categories" />
