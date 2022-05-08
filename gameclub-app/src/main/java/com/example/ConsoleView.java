@@ -109,16 +109,18 @@ public class ConsoleView {
     }
 
     public void displayOptionalGames(List<com.example.entity.Game> optionalGames) {
+        String result = "";
+        int id = 1;
         if (optionalGames.size() > 0) {
-            String result = "";
-            int id = 1;
             for(com.example.entity.Game game : optionalGames) {
                 result += id + ". " + ( game.getName() != null ? game.getName() + "\n": "" );
                 id++;
             }
-            result += id + ". Back to the menu\n\nPlease choose game: ";
-            System.out.println(result);
+        } else {
+            System.out.println("No available game selectable.\n");
         }
+        result += id + ". Back to the menu\n\nPlease choose an item: ";
+        System.out.println(result);
     }
 
     public void displayJoinableGroups(List<com.example.entity.Group> optionalGroups) {

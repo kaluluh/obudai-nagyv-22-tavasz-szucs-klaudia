@@ -4,25 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="soma changes">
-      <change afterPath="$PROJECT_DIR$/gameclub-app/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/MetaData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/TestDataGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Group.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequestId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Limits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/GameRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/GroupRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/JoinRequestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/repository/PlayerRepository.java" afterDir="false" />
+    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
@@ -323,7 +306,8 @@
       <workItem from="1651416859314" duration="99000" />
       <workItem from="1651417005739" duration="887000" />
       <workItem from="1651614741011" duration="409000" />
-      <workItem from="1651909323086" duration="24549000" />
+      <workItem from="1651909323086" duration="25794000" />
+      <workItem from="1652013134532" duration="3234000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -381,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651408868871</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="JPA base">
+      <created>1651937410897</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651937410897</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,23 +401,10 @@
     <MESSAGE value="Soma changes" />
     <MESSAGE value="Added transformations between domain and dto objects" />
     <MESSAGE value="soma changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="soma changes" />
+    <MESSAGE value="JPA base" />
+    <option name="LAST_COMMIT_MESSAGE" value="JPA base" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.example.dto.GameFormDTO" memberName="categories" />

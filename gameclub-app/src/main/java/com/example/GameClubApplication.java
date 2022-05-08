@@ -62,6 +62,7 @@ public class GameClubApplication implements CommandLineRunner {
 
     private boolean selectedMenuPointStart(MenuItem menuItem) {
         boolean isBackToTheMenu = false;
+        boolean isSuccess = false;
         switch (menuItem.getId()) {
             case 1:
                 consoleView.displayGameList(gameClubService.getGameList());
@@ -69,10 +70,10 @@ public class GameClubApplication implements CommandLineRunner {
                 break;
             case 2:
                 consoleView.displayOptionalGames(gameClubService.getAllOptionalGames());
-                boolean isSuccess = gameClubService.addNewGame(consoleView.readingSelectedMenuNumber());
-                if (isSuccess) {
-                    consoleView.displayGameSelected();
-                }
+                    isSuccess = gameClubService.addNewGame(consoleView.readingSelectedMenuNumber());
+                    if (isSuccess) {
+                        consoleView.displayGameSelected();
+                    }
                 isBackToTheMenu = true;
                 break;
             case 3:

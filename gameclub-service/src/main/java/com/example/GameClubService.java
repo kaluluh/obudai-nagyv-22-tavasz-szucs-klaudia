@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.domain.*;
+import com.example.entity.*;
 import com.example.entity.Group;
 import com.example.entity.JoinRequestId;
 import com.example.entity.Player;
@@ -75,16 +76,21 @@ public class GameClubService {
     public boolean addNewGame(int selectedNumber) {
         List<com.example.entity.Game> optionalGames = getGamesNotOwnedByPlayer();
         boolean success = false;
-        if (selectedNumber < 0 && selectedNumber <= optionalGames.size()) {
-        } else {
-            com.example.entity.Game selectedGame = optionalGames.get(selectedNumber - 1);
-            MetaData.currentPlayer.getGames().add(selectedGame);
-            try {
-                playerRepository.save(MetaData.currentPlayer);
-                success = true;
-            } catch (Exception e) {
-                log.error("Error saving game", e);
+
+        if (!optionalGames.isEmpty()) {
+            if (selectedNumber < 0 && selectedNumber <= optionalGames.size()) {
+            } else {
+                com.example.entity.Game selectedGame = optionalGames.get(selectedNumber - 1);
+                MetaData.currentPlayer.getGames().add(selectedGame);
+                try {
+                    playerRepository.save(MetaData.currentPlayer);
+                    success = true;
+                } catch (Exception e) {
+                    log.error("Error saving game", e);
+                }
             }
+        } else {
+            success = true;
         }
         return success;
     }
