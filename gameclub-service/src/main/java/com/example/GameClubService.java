@@ -1,6 +1,9 @@
 package com.example;
 
-import com.example.domain.*;
+import com.example.domain.Category;
+import com.example.domain.Credentials;
+import com.example.domain.GameForm;
+import com.example.domain.JoinRequestState;
 import com.example.entity.*;
 import com.example.entity.Group;
 import com.example.entity.JoinRequestId;
@@ -29,8 +32,8 @@ public class GameClubService {
     private final JoinRequestRepository joinRequestRepository;
     private final PlayerRepository playerRepository;
 
-    public com.example.entity.Player authenticate(Credentials credentials) {
-        com.example.entity.Player player = playerRepository.findByLoginNameAndPassword(credentials.getUserName(), credentials.getPassword());
+    public Player authenticate(Credentials credentials) {
+        Player player = playerRepository.findByLoginNameAndPassword(credentials.getUserName(), credentials.getPassword());
         // Lazy loaded collections need to be initialized, for this I'm using a toString call
         if (player != null) {
             player.getGames().toString();
@@ -41,7 +44,7 @@ public class GameClubService {
     }
 
     public Group getGroupForAdmin(Player player) {
-        com.example.entity.Group group = groupRepository.findByAdmin(player);
+        Group group = groupRepository.findByAdmin(player);
         // Lazy loaded collections need to be initialized, for this I'm using a toString call
         group.toString();
         MetaData.currentPlayerGroup = group;
@@ -49,38 +52,38 @@ public class GameClubService {
     }
 
     public com.example.entity.Group getGroupForPlayer(com.example.entity.Player player) {
-        com.example.entity.Group group = groupRepository.findByPlayer(player);
+        Group group = groupRepository.findByPlayer(player);
         // Lazy loaded collections need to be initialized, for this I'm using a toString call
         group.toString();
         MetaData.currentPlayerGroup = group;
         return group;
     }
 
-    public List<com.example.entity.Game> getGameList() {
-        List<com.example.entity.Game> games = (ArrayList<com.example.entity.Game>)gameRepository.findAll();
+    public List<Game> getGameList() {
+        List<Game> games = (ArrayList<com.example.entity.Game>)gameRepository.findAll();
         // Lazy loaded collection need to be initialized, for this I'm using a toString call
         games.toString();
         return games;
     }
 
-    public List<com.example.entity.Game> getGamesNotOwnedByPlayer() {
-        List<com.example.entity.Game> games = getGameList();
+    public List<Game> getGamesNotOwnedByPlayer() {
+        List<Game> games = getGameList();
         games.removeAll(MetaData.currentPlayer.getGames());
         return games;
     }
 
-    public List<com.example.entity.Game> getAllOptionalGames() {
+    public List<Game> getAllOptionalGames() {
         return getGamesNotOwnedByPlayer();
     }
 
     public boolean addNewGame(int selectedNumber) {
-        List<com.example.entity.Game> optionalGames = getGamesNotOwnedByPlayer();
+        List<Game> optionalGames = getGamesNotOwnedByPlayer();
         boolean success = false;
 
         if (!optionalGames.isEmpty()) {
             if (selectedNumber < 0 && selectedNumber <= optionalGames.size()) {
             } else {
-                com.example.entity.Game selectedGame = optionalGames.get(selectedNumber - 1);
+                Game selectedGame = optionalGames.get(selectedNumber - 1);
                 MetaData.currentPlayer.getGames().add(selectedGame);
                 try {
                     playerRepository.save(MetaData.currentPlayer);
@@ -95,20 +98,20 @@ public class GameClubService {
         return success;
     }
 
-    public List<com.example.entity.Group> getJoinableGroups() {
-        List<com.example.entity.Group> groups = (List<com.example.entity.Group>)groupRepository.findAll();
+    public List<Group> getJoinableGroups() {
+        List<Group> groups = (List<Group>)groupRepository.findAll();
         groups.remove(MetaData.currentPlayerGroup);
         return groups;
     }
 
     public boolean addJoinRequest(int selectedNumber) {
-        List<com.example.entity.Group> groups = getJoinableGroups();
+        List<Group> groups = getJoinableGroups();
         boolean success = false;
         if (selectedNumber < groups.size()) {
-            com.example.entity.Group selectedGroup = groups.get(selectedNumber - 1);
+            Group selectedGroup = groups.get(selectedNumber - 1);
             JoinRequestId joinRequestId = new JoinRequestId(MetaData.currentPlayer.getId(), selectedGroup.getId());
             try {
-                joinRequestRepository.save(new com.example.entity.JoinRequest(joinRequestId, JoinRequestState.REQUESTED));
+                joinRequestRepository.save(new JoinRequest(joinRequestId, JoinRequestState.REQUESTED));
                 success = true;
             } catch (Exception e) {
                 log.error("Error saving join request", e);
@@ -122,7 +125,7 @@ public class GameClubService {
     }
 
     public List<String> getJoinRequestPlayerNames() {
-        List<com.example.entity.Player> players = (List<com.example.entity.Player>)playerRepository.findAllById(
+        List<Player> players = (List<Player>)playerRepository.findAllById(
                 MetaData.currentPlayerGroup.getJoinRequests().stream()
                 .map(r -> r.getJoinRequestId().getPlayerId()).collect(Collectors.toList()));
         return players.stream().map(p -> p.getName()).collect(Collectors.toList());
@@ -138,7 +141,7 @@ public class GameClubService {
         }
         if ( index > getJoinRequests().size()) {
         } else {
-            com.example.entity.JoinRequest joinRequest = getJoinRequests().get(index - 1);
+            JoinRequest joinRequest = getJoinRequests().get(index - 1);
             if (joinRequestId.contains("A")) {
                 state = JoinRequestState.ACCEPTED;
             } else if (joinRequestId.contains("R")) {
@@ -170,7 +173,7 @@ public class GameClubService {
         } else {
             categories.add(Category.valueOf(gameForm.getCategories()));
         }
-        com.example.entity.Game game = com.example.entity.Game.builder()
+        Game game = Game.builder()
                 .name(gameForm.getName())
                 .description(gameForm.getDescription())
                 .minimumAge(gameForm.getMinimumAge())
