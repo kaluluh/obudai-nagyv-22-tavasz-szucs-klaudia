@@ -2,5 +2,5 @@ rootProject.name = 'gameclub'
 include 'gameclub-domain'
 include 'gameclub-service'
 include 'gameclub-persistence'
-include 'gameclub-app'
+include 'gameclub-web'
 

@@ -4,11 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
+    <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="Soma issue handling added">
+      <change afterPath="$PROJECT_DIR$/gameclub-web/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/controller/GameClubController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/static/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/static/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/static/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/static/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/games-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/group-details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/user-details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gameclub-web/src/main/webapp/views/user-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/ConsoleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/java/com/example/GameClubApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-app/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +82,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -99,15 +116,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gameclub-app/src/main" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -116,9 +136,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gameclub-app/src/main" />
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/resources" />
       <recent name="$PROJECT_DIR$/gameclub-app/src/test" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/gameclub-persistence/src/test/resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/resources" />
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/css" />
+      <recent name="$PROJECT_DIR$/gameclub-web/src/main/webapp/views" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.repository" />
@@ -131,30 +160,7 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GameClub">
-    <configuration name="PlayerActionTest.loadingFiles (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":gameclub-app:test" />
-            <option value="--tests" />
-            <option value="&quot;PlayerActionTest.loadingFiles&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.GameClubApplication">
     <configuration name="PlayerActionTest.shouldLogin (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -243,8 +249,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="GameClub" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="GameClub" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="gameclub.gameclub-app.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.GameClubApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameClubApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="gameclub.gameclub-web.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.GameClubApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -252,11 +271,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.GameClubApplication" />
+        <item itemvalue="Spring Boot.GameClub" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [build]" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [clean]" />
         <item itemvalue="Gradle.PlayerActionTest.shouldLogin (1)" />
-        <item itemvalue="Gradle.PlayerActionTest.shouldLogin (2)" />
-        <item itemvalue="Gradle.PlayerActionTest.loadingFiles (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -307,7 +326,16 @@
       <workItem from="1651417005739" duration="887000" />
       <workItem from="1651614741011" duration="409000" />
       <workItem from="1651909323086" duration="25794000" />
-      <workItem from="1652013134532" duration="3234000" />
+      <workItem from="1652013134532" duration="21976000" />
+      <workItem from="1652082539088" duration="173000" />
+      <workItem from="1652082961163" duration="1230000" />
+      <workItem from="1652093119296" duration="1313000" />
+      <workItem from="1652100074107" duration="983000" />
+      <workItem from="1652129153198" duration="1389000" />
+      <workItem from="1652172539780" duration="681000" />
+      <workItem from="1652174168694" duration="285000" />
+      <workItem from="1652196642130" duration="1998000" />
+      <workItem from="1652199190349" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -372,7 +400,35 @@
       <option name="project" value="LOCAL" />
       <updated>1651937410897</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Soma issue handling added">
+      <created>1652016634582</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1652016634582</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Using imports instead of package path">
+      <created>1652129364418</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1652129364418</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Using imports instead of package path">
+      <created>1652172761235</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1652172761235</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Modify one condition">
+      <created>1652198578320</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652198578320</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,7 +458,10 @@
     <MESSAGE value="Added transformations between domain and dto objects" />
     <MESSAGE value="soma changes" />
     <MESSAGE value="JPA base" />
-    <option name="LAST_COMMIT_MESSAGE" value="JPA base" />
+    <MESSAGE value="Soma issue handling added" />
+    <MESSAGE value="Using imports instead of package path" />
+    <MESSAGE value="Modify one condition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify one condition" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
