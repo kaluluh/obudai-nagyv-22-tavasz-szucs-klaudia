@@ -1,9 +1,11 @@
 package com.example;
 
 import com.example.domain.*;
+import com.example.entity.*;
 import com.example.entity.Game;
 import com.example.entity.Group;
 import com.example.entity.Player;
+import com.example.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -33,7 +35,7 @@ public class ConsoleView {
         return credentials;
     }
 
-    public void displayLogin(com.example.entity.User user) {
+    public void displayLogin(User user) {
         System.out.println("\nLogin successful.Your role(s): \n" );
         user.getRoles().forEach(r -> {
             System.out.println(r.toString());
@@ -48,7 +50,7 @@ public class ConsoleView {
        System.out.println(getGroupAdminData(player, playerGroup, joinRequestNames));
     }
 
-    public void displayPlayer(com.example.entity.Player player, com.example.entity.Group playerGroup) {
+    public void displayPlayer(Player player, Group playerGroup) {
        System.out.println(getPlayerData(player, playerGroup.getName()));
     }
 
@@ -108,11 +110,11 @@ public class ConsoleView {
         System.out.println("New game added successfully!\n");
     }
 
-    public void displayOptionalGames(List<com.example.entity.Game> optionalGames) {
+    public void displayOptionalGames(List<Game> optionalGames) {
         String result = "";
         int id = 1;
         if (optionalGames.size() > 0) {
-            for(com.example.entity.Game game : optionalGames) {
+            for(Game game : optionalGames) {
                 result += id + ". " + ( game.getName() != null ? game.getName() + "\n": "" );
                 id++;
             }
@@ -123,10 +125,10 @@ public class ConsoleView {
         System.out.println(result);
     }
 
-    public void displayJoinableGroups(List<com.example.entity.Group> optionalGroups) {
+    public void displayJoinableGroups(List<Group> optionalGroups) {
         String result = "";
         int id = 1;
-        for (com.example.entity.Group group : optionalGroups) {
+        for (Group group : optionalGroups) {
             result += id + ". " + group.getName() + "\n";
             id++;
         }
@@ -134,9 +136,9 @@ public class ConsoleView {
         System.out.println(result);
     }
 
-    public void displayGameList(List<com.example.entity.Game> games) {
+    public void displayGameList(List<Game> games) {
         String result = "";
-        for (com.example.entity.Game game : games) {
+        for (Game game : games) {
             result += "\n- id: " + ( game.getId() != null ? game.getId().toString() : "N/A")  +
                     "\n\tName: "
                     + ( game.getName() != null ? game.getName() : "N/A") +
