@@ -107,7 +107,7 @@ public class GameClubService {
     public boolean addJoinRequest(int selectedNumber) {
         List<Group> groups = getJoinableGroups();
         boolean success = false;
-        if (selectedNumber < groups.size()) {
+        if (selectedNumber <= groups.size()) {
             Group selectedGroup = groups.get(selectedNumber - 1);
             JoinRequestId joinRequestId = new JoinRequestId(MetaData.currentPlayer.getId(), selectedGroup.getId());
             try {

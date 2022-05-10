@@ -63,8 +63,8 @@ public class TestDataGenerator {
         playerRepository.save(groupAdmin);
 
         game = gameRepository.findById(2L).get();
-        Player player = createPlayer("macko", "asd-123","Nagy Norbert",
-                "macko@gmail.com",Arrays.asList(Role.PLAYER),Arrays.asList(game));
+        Player player = createPlayer("kovacsp", "kp-secret","Kovács Péter",
+                "kovacs.peter@gmail.com",Arrays.asList(Role.PLAYER),Arrays.asList(game));
         playerRepository.save(player);
 
     }
