@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="bootstrap.css" rel="stylesheet"/>
+    <link href="custom.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div th:insert="navbar :: navbar"></div>
+
+<div class="container">
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Group details</h3>
+        </div>
+        <div class="card-body bg-light">
+            <dl class="row">
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9" th:text="${group.name}"></dd>
+
+                <dt class="col-sm-3">Admin name</dt>
+                <dd class="col-sm-9" th:text="${group.admin.name}"></dd>
+            </dl>
+
+            <h6>Members</h6>
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email address</th>
+                </tr>
+                </thead>
+                <tbody th:each="member: ${group.members}">
+                <tr>
+                    <td th:text="${member.name}">Kovács Péter</td>
+                    <td th:text="${member.email}">kovacs.peter@gmail.com</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h6>Events</h6>
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Event Date</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Attend</th>
+                </tr>
+                </thead>
+                <tbody th:each="event: ${group.events}">
+                <tr>
+                    <td th:text="${event.date}"></td>
+                    <td th:text="${event.place}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${#lists.isEmpty(joinRequests)}" style="color: #20c997">
+                No active join requests!</i>
+            </div>
+            <div th:if="${not #lists.isEmpty(joinRequests)}">
+            <h6>Join Requests</h6>
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="joinRequest: ${joinRequests}">
+                    <td th:text="${joinRequest.playerName}"></td>
+                    <td style="width:15%">
+                        <form method="POST" style="float: left" th:action="@{/handle-join-requests(playerId=${joinRequest.playerId},isAccepted=${true},groupId=${group.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-primary btn-sm">
+                                Accept
+                            </button>
+                        </form>
+                        <form method="POST" style="float: right" th:action="@{/handle-join-requests(playerId=${joinRequest.playerId},isAccepted=${false},groupId=${group.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-danger btn-sm">
+                                Reject
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

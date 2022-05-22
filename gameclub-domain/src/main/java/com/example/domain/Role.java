@@ -1,5 +1,12 @@
 package com.example.domain;
 
-public enum Role {
-    PLAYER, GROUP_ADMIN, SUPERUSER
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+    PLAYER, GROUP_ADMIN, SUPERUSER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

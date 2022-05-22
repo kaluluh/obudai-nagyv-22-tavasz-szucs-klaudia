@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link href="bootstrap.css" rel="stylesheet"/>
+    <link href="custom.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+    <div class="navbar-brand">Game Club</div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" sec:authorize="hasAnyAuthority('PLAYER','GROUP_ADMIN', 'SUPERUSER')">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('PLAYER','GROUP_ADMIN')">
+                <a class="nav-link" href="/group-membership">Groups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/games-list" sec:authorize="hasAnyAuthority('PLAYER','GROUP_ADMIN')">Games</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('GROUP_ADMIN')">
+                <a class="nav-link" href="/my-group">My group</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('SUPERUSER')">
+                <a class="nav-link" href="/add-game">Add game</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </div>
+
+</nav>
+</body>
+</html>

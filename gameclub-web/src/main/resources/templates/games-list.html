@@ -5,27 +5,42 @@
     <link href="custom.css" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="navbar-brand">Game Club</div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="user-details">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="group-details">Groups</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="games-list">Games</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-        </form>
-    </div>
-</nav>
-<div class="container">
+<div th:insert="navbar :: navbar"></div>
 
+<div class="container">
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>My Games</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Min age</th>
+                    <th scope="col">No. players</th>
+                    <th scope="col">Play time</th>
+                    <th scope="col">Categories</th>
+                </tr>
+                </thead>
+                <tbody style="text-align:justify">
+                <tr th:each="cur: ${currentGames}">
+                    <td th:text="${cur.name}"></td>
+                    <td th:text="${cur.description}"></td>
+                    <td th:text="${cur.minimumAge}"></td>
+                    <td th:text="${cur.numberOfPlayers.toString()}"></td>
+                    <td th:text="${cur.playTime.toString()}"> min</td>
+                    <td th:each="category: ${cur.categories}" th:text="${category}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="margin-top:5mm;" th:if="${optionalGames.size() > 0}">
     <div class="card border border-info border-3">
         <div class="card-header bg-info">
             <h3>All Games</h3>
@@ -40,39 +55,21 @@
                     <th scope="col">No. players</th>
                     <th scope="col">Play time</th>
                     <th scope="col">Categories</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>Catan Telepesei</td>
-                    <td>A Catan telepesei a legtöbb társasjáték rajongónak ez első lépés ami túlmutat a gyermekkori
-                        klasszikus dobok és lépek játékokon. A játék célja Catan szigetén megszerezni az uralmat. Az
-                        első telepesek egy ismeretlen sziget partjaihoz érnek. Településeket és utcákat építenek,
-                        településeiket városokká fejlesztik. Egyszer téglából bőséges a készlet másszor pedig ércből az
-                        élénk cserekereskedelemmel új lehetőségek nyílnak meg mindenki előtt, ami nagy interakciót
-                        eredményez a játékosok között! Hamarosan szűkössé válik az élet a szigeten, és egy verseny veszi
-                        kezdetét a nyersanyagok és a hatalom megszerzéséért.
-                    </td>
-                    <td>10</td>
-                    <td>3 - 4</td>
-                    <td>60 - 120 min</td>
-                    <td>Strategy</td>
-                </tr>
-                <tr>
-                    <td>Pandemic</td>
-                    <td>Megvan benned a képesség és a bátorság ahhoz, hogy megmentsd az emberiséget ? Az izgalmas
-                        stratégiai játékban egy járványelhárító csapat szakképzett tagjaként feladatod, hogy felfedezd a
-                        halálos járvány ellenszérumát, még mielőtt az világszerte elterjedne. Neked és a csapat
-                        tagjainak a világot bejárva kell harcolnotok a fertőzéssel, és meg kell találnotok az
-                        ellenszerhez szükséges anyagokat. Használd saját szakértelmed és dolgozzatok össze a közös siker
-                        érdekében. Az óra ketyeg, a betegségek világméretű járványok révén pedig folyamatosan terjednek.
-                        Az emberiség sorsa a ti kezetekben van! Találjátok meg a 4 ellenszert időben, még mielőtt
-                        mindenki megfertőződne!
-                    </td>
-                    <td>8</td>
-                    <td>2 - 4</td>
-                    <td>45 - 60 min</td>
-                    <td>Strategy</td>
+                <tbody style="text-align:justify">
+                <tr th:each="op: ${optionalGames}">
+                    <td th:text="${op.name}"></td>
+                    <td th:text="${op.description}"></td>
+                    <td th:text="${op.minimumAge}"></td>
+                    <td th:text="${op.numberOfPlayers.toString()}"></td>
+                    <td th:text="${op.playTime.toString()}"> min</td>
+                    <td th:each="category: ${op.categories}" th:text="${category}"></td>
+                    <td>
+                        <form method="POST" th:action="@{/add-game-to-list(gameId=${op.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-primary btn-sm">Add</button>
+                        </form>
                 </tr>
                 </tbody>
             </table>

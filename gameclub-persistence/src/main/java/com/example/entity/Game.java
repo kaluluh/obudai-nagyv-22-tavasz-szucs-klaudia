@@ -2,6 +2,7 @@ package com.example.entity;
 
 import com.example.domain.Category;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +17,9 @@ import java.util.List;
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "OverridableIdentity", strategy = "com.example.OverridableIdentityGenerator")
+    @GeneratedValue(generator = "OverridableIdentity")
+    @Column(unique = true, nullable = false)
     private Long id;
     private String name;
     @Lob
@@ -26,14 +29,14 @@ public class Game {
     private List<Category> categories;
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride( name = "minimum", column = @Column(name = "fromPlaytime")),
-            @AttributeOverride( name = "maximum", column = @Column(name = "toPlaytime"))
+            @AttributeOverride( name = "minimum", column = @Column(name = "playtime_min")),
+            @AttributeOverride( name = "maximum", column = @Column(name = "playtime_max"))
     })
     private Limits playTime;
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride( name = "minimum", column = @Column(name = "minNumOfPlayers")),
-            @AttributeOverride( name = "maximum", column = @Column(name = "maxNumOfPlayers"))
+            @AttributeOverride( name = "minimum", column = @Column(name = "playernum_min")),
+            @AttributeOverride( name = "maximum", column = @Column(name = "playernum_max"))
     })
     private Limits numberOfPlayers;
 

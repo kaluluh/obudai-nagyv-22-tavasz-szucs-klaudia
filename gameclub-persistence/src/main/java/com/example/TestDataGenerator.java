@@ -29,13 +29,13 @@ public class TestDataGenerator {
     @Autowired
     private JoinRequestRepository joinRequestRepository;
 
-    @PostConstruct
-    public void createData() {
-        createGameTestData();
-        createPlayerTestData();
-        createGroupTestData();
-        createJoinRequest();
-    }
+//    @PostConstruct
+//    public void createData() {
+//        createGameTestData();
+//        createPlayerTestData();
+//        createGroupTestData();
+//        createJoinRequest();
+//    }
 
     public void createGameTestData () {
         Game catanTelepesei = createGame("Catan Telepesei", "A Catan telepesei a legtöbb társasjáték\n" +

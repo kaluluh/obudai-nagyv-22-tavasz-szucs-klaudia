@@ -2,6 +2,7 @@ package com.example.entity;
 
 import com.example.domain.JoinRequestState;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +16,11 @@ import javax.persistence.Table;
 @Table(name = "join_requests")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class JoinRequest {
 
     @EmbeddedId
     private JoinRequestId joinRequestId;
     private JoinRequestState joinRequestState;
+
 }

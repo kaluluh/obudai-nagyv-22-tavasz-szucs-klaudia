@@ -1,0 +1,76 @@
+<html xmlns:form="http://www.springframework.org/tags/form">
+<head>
+    <link href="/bootstrap.css" rel="stylesheet"/>
+    <link href="/custom.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div th:insert="navbar :: navbar"></div>
+
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>List of Events</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Event Date</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Participants</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="event : ${events}">
+                    <td th:text="${event.date}">2022.03.23. 18:00</td>
+                    <td th:text="${event.place}">Board Game Cafe Budapest, Ferenc körút 17.</td>
+                    <td th:text="${event.description}"></td>
+                    <td >
+                        <ul class="list-group list-group-flush" th:each="participant : ${event.participants}">
+                            <li class="list-group-item" th:text="${participant.name}">Kata Nagy</li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="container" style="margin-top:5mm; ">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Add Event</h3>
+        </div>
+        <div class="card-body bg-light">
+            <form action="#" th:action="@{/save-event}" th:object="${eventDTO}" method="post">
+                <div class="form-group row">
+                    <label for="date" class="col-sm-2 col-form-label">Event Date</label>
+                    <input type="date" class="form-control" id="date" th:field="*{date}">
+<!--                    <p th:if="${#fields.hasErrors('date')}" th:errorclass="error" th:errors="*{date}" />-->
+                    <form:errors class="errorMessage" path="date"/><br>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" th:field="*{location}">
+                    <p th:if="${#fields.hasErrors('location')}" th:errorclass="error" th:errors="*{location}" />
+<!--                    <form:errors class="errorMessage" path="location"/><br>-->
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
+<!--                    <form:errors class="errorMessage" path="description"/><br>-->
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

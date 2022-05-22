@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/bootstrap.css" rel="stylesheet"/>
+    <link href="/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="navbar :: navbar"></div>
+
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Add Game</h3>
+        </div>
+        <div class="card-body bg-light">
+            <form action="#" th:action="@{/save-game}" th:object="${gameDTO}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="minAge">Minimum age</label>
+                    <input type="text" class="form-control" id="minAge" th:field="*{minAge}">
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <div class="row-sm mb-3">
+                            <label for="noOfPlayersMin">No. players min</label>
+                            <input type="number" class="form-control col-sm" id="noOfPlayersMin" th:field="*{noOfPlayersMin}">
+                        </div>
+                        <div class="row-sm">
+                            <label for="noOfPlayersMax">No. players max</label>
+                            <input type="number" class="form-control col-sm" id="noOfPlayersMax" th:field="*{noOfPlayersMax}">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm">
+                        <div class="row-sm mb-3">
+                            <label for="playTimeMin">Play time min</label>
+                            <input type="number" class="form-control col-sm" id="playTimeMin" th:field="*{playTimeMin}">
+                        </div>
+                        <div class="row-sm">
+                            <label for="playTimeMax">Play time max</label>
+                            <input type="number" class="form-control col-sm" id="playTimeMax" th:field="*{playTimeMax}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="categories">Category</label>
+                    <select multiple class="form-control" id="categories" th:field="*{categories}">
+                        <option value="FANTASY">Fantasy</option>
+                        <option value="MYTHOLOGY">Mythology</option>
+                        <option value="WAR">War</option>
+                        <option value="STRATEGY">Strategy</option>
+                        <option value="BUILDING">Building</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

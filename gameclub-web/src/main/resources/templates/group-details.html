@@ -1,30 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="bootstrap.css" rel="stylesheet"/>
-    <link href="custom.css" rel="stylesheet"/>
+    <link href="/bootstrap.css" rel="stylesheet"/>
+    <link href="/custom.css" rel="stylesheet"/>
 </head>
 <body>
+<div th:insert="navbar :: navbar"></div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="navbar-brand">Game Club</div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="user-details">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="group-details">Groups</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="games-list">Games</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-        </form>
-    </div>
-</nav>
 <div class="container">
     <div class="card border border-info border-3">
         <div class="card-header bg-info">
@@ -33,10 +15,10 @@
         <div class="card-body bg-light">
             <dl class="row">
                 <dt class="col-sm-3">Name</dt>
-                <dd class="col-sm-9">Óbudai Informatika Játék Csoport</dd>
+                <dd class="col-sm-9" th:text="${group.name}"></dd>
 
                 <dt class="col-sm-3">Admin name</dt>
-                <dd class="col-sm-9">Horváth Ádám</dd>
+                <dd class="col-sm-9" th:text="${group.admin.name}"></dd>
             </dl>
 
             <h6>Members</h6>
@@ -48,17 +30,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Kovács Péter</td>
-                    <td>kovacs.peter@gmail.com</td>
-                </tr>
-                <tr>
-                    <td>Kiss István</td>
-                    <td>kiss.istvan@gmail.com</td>
+                <tr th:each="member: ${group.members}">
+                    <td th:text="${member.name}"></td>
+                    <td th:text="${member.email}"></td>
                 </tr>
                 </tbody>
             </table>
 
+            <a th:href="@{'/event-details/' + ${group.id}}" sec:authorize="hasAuthority('GROUP_ADMIN')">Events</a>
+            <div sec:authorize="hasAuthority('PLAYER')">
             <h6>Events</h6>
             <table class="table table-bordered bg-white">
                 <thead>
@@ -69,20 +49,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>2022.03.23. 18:00</td>
-                    <td>Board Game Cafe Budapest, Ferenc körút 17.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2022.03.25. 20:00</td>
-                    <td>At Józsi apartmant, Liszt F. u 17.</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary btn-sm">Attend</button>
+                <tr th:each="event: ${group.events}">
+                    <td th:text="${event.date}"></td>
+                    <td th:text="${event.place}"></td>
+                    <td th:if="${event.participatePlayer(currentPlayer.id)}"></td>
+                    <td class="text-center" th:unless="${event.participatePlayer(currentPlayer.id)}">
+                        <form method="POST" th:action="@{/attend-event(playerId=${currentPlayer.id},eventId=${event.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-primary btn-sm">
+                                Attend
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
+                </div>
         </div>
     </div>
 </div>

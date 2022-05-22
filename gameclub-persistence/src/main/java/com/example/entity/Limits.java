@@ -15,4 +15,9 @@ import javax.persistence.Table;
 public class Limits {
     private Integer minimum;
     private Integer maximum;
+
+    @Override
+    public String toString() {
+        return minimum + " - " + maximum;
+    }
 }
