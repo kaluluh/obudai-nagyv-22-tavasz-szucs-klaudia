@@ -3,12 +3,15 @@
 <head>
     <link href="/bootstrap.css" rel="stylesheet"/>
     <link href="/custom.css" rel="stylesheet"/>
+    <style>
+        p {color:red;font-weight: bold;}
+    </style>
 </head>
 <body>
 <div th:insert="navbar :: navbar"></div>
 
 <div class="container">
-
+<p th:if="${#fields.hasErrors('gameDTO')}" th:errors="*{gameDTO}"></p>
     <div class="card border border-info border-3">
         <div class="card-header bg-info">
             <h3>Add Game</h3>
@@ -18,25 +21,31 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                 </div>
                 <div class="form-group">
                     <label for="minAge">Minimum age</label>
                     <input type="text" class="form-control" id="minAge" th:field="*{minAge}">
+                    <p th:if="${#fields.hasErrors('minAge')}" th:errors="*{minAge}"></p>
                 </div>
+
 
                 <div class="row">
                     <div class="form-group col-sm">
                         <div class="row-sm mb-3">
                             <label for="noOfPlayersMin">No. players min</label>
                             <input type="number" class="form-control col-sm" id="noOfPlayersMin" th:field="*{noOfPlayersMin}">
+                            <p th:if="${#fields.hasErrors('noOfPlayersMin')}" th:errors="*{noOfPlayersMin}"></p>
                         </div>
                         <div class="row-sm">
                             <label for="noOfPlayersMax">No. players max</label>
                             <input type="number" class="form-control col-sm" id="noOfPlayersMax" th:field="*{noOfPlayersMax}">
+                            <p th:if="${#fields.hasErrors('noOfPlayersMax')}" th:errors="*{noOfPlayersMax}"></p>
                         </div>
                     </div>
 
@@ -44,10 +53,12 @@
                         <div class="row-sm mb-3">
                             <label for="playTimeMin">Play time min</label>
                             <input type="number" class="form-control col-sm" id="playTimeMin" th:field="*{playTimeMin}">
+                            <p th:if="${#fields.hasErrors('playTimeMin')}" th:errors="*{playTimeMin}"></p>
                         </div>
                         <div class="row-sm">
                             <label for="playTimeMax">Play time max</label>
                             <input type="number" class="form-control col-sm" id="playTimeMax" th:field="*{playTimeMax}">
+                            <p th:if="${#fields.hasErrors('playTimeMax')}" th:errors="*{playTimeMax}"></p>
                         </div>
                     </div>
                 </div>
@@ -61,6 +72,7 @@
                         <option value="STRATEGY">Strategy</option>
                         <option value="BUILDING">Building</option>
                     </select>
+                    <p th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

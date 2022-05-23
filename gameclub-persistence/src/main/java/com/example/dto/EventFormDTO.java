@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,12 +16,12 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventDTO implements TransformableToDomainObject<Event> {
+public class EventFormDTO implements TransformableToDomainObject<Event> {
     @DateConstraint
     private String date;
-    @NotEmpty(message = "Location can not be empty")
+    @NotEmpty(message = "*Location must be filled")
     private String location;
-    @NotEmpty(message = "Description can not be empty")
+    @NotEmpty(message = "*Description must be filled")
     private String description;
 
     @Override

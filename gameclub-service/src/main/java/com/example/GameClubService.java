@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.domain.*;
-import com.example.dto.EventDTO;
 import com.example.dto.JoinRequestsDTO;
 import com.example.entity.Event;
 import com.example.entity.Game;
@@ -208,8 +207,8 @@ public class GameClubService {
         event.setId(lastEventId);
         eventRepository.save(event);
 
-//        MetaData.currentPlayerGroup.getEvents().add(event);
-//        groupRepository.save(MetaData.currentPlayerGroup);
+        MetaData.currentPlayerGroup.getEvents().add(event);
+        groupRepository.save(MetaData.currentPlayerGroup);
     }
 
     public void saveGame(Game game) {

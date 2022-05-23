@@ -1,7 +1,12 @@
-<html xmlns:form="http://www.springframework.org/tags/form">
+<!DOCTYPE html>
+<html>
 <head>
     <link href="/bootstrap.css" rel="stylesheet"/>
     <link href="/custom.css" rel="stylesheet"/>
+    <style>
+        p {color:red;font-weight: bold;}
+        </style>
+
 </head>
 <body>
 
@@ -25,8 +30,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="event : ${events}">
-                    <td th:text="${event.date}">2022.03.23. 18:00</td>
-                    <td th:text="${event.place}">Board Game Cafe Budapest, Ferenc körút 17.</td>
+                    <td th:text="${#temporals.format(event.date, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${event.place}"></td>
                     <td th:text="${event.description}"></td>
                     <td >
                         <ul class="list-group list-group-flush" th:each="participant : ${event.participants}">
@@ -48,29 +53,33 @@
             <h3>Add Event</h3>
         </div>
         <div class="card-body bg-light">
-            <form action="#" th:action="@{/save-event}" th:object="${eventDTO}" method="post">
-                <div class="form-group row">
+            <form action="#" th:action="@{/save-event}" th:object="${eventForm}" method="post">
+                <div class="form-group">
                     <label for="date" class="col-sm-2 col-form-label">Event Date</label>
-                    <input type="date" class="form-control" id="date" th:field="*{date}">
-<!--                    <p th:if="${#fields.hasErrors('date')}" th:errorclass="error" th:errors="*{date}" />-->
-                    <form:errors class="errorMessage" path="date"/><br>
+                    <input type="date" class="form-control" id="date" th:field="*{date}" onload="getDate()" name="date" >
+                    <p th:if="${#fields.hasErrors('date')}" th:errors="*{date}">
+                        *Date must be in the future
+                    <p>
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
                     <input type="text" class="form-control" id="location" th:field="*{location}">
-                    <p th:if="${#fields.hasErrors('location')}" th:errorclass="error" th:errors="*{location}" />
-<!--                    <form:errors class="errorMessage" path="location"/><br>-->
+                    <p th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></p>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
-                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
-<!--                    <form:errors class="errorMessage" path="description"/><br>-->
+                    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    var today = new Date();
+    document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+</script>
 </body>
 </html>

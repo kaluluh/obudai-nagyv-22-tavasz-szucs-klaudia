@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="event: ${group.events}">
-                    <td th:text="${event.date}"></td>
+                    <td th:text="${#temporals.format(event.date, 'yyyy-MM-dd HH:mm')}"></td>
                     <td th:text="${event.place}"></td>
                     <td th:if="${event.participatePlayer(currentPlayer.id)}"></td>
                     <td class="text-center" th:unless="${event.participatePlayer(currentPlayer.id)}">

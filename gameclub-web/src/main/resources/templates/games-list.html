@@ -31,7 +31,11 @@
                     <td th:text="${cur.minimumAge}"></td>
                     <td th:text="${cur.numberOfPlayers.toString()}"></td>
                     <td th:text="${cur.playTime.toString()}"> min</td>
-                    <td th:each="category: ${cur.categories}" th:text="${category}"></td>
+                    <td>
+                        <ul class="list-group list-group-flush"  th:each="c: ${cur.categories}" >
+                            <li class="list-group-item" th:text="${c}"></li>
+                        </ul>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -65,7 +69,11 @@
                     <td th:text="${op.minimumAge}"></td>
                     <td th:text="${op.numberOfPlayers.toString()}"></td>
                     <td th:text="${op.playTime.toString()}"> min</td>
-                    <td th:each="category: ${op.categories}" th:text="${category}"></td>
+                    <td>
+                        <ul class="list-group list-group-flush"  th:each="c: ${op.categories}" >
+                            <li class="list-group-item" th:text="${c}"></li>
+                        </ul>
+                    </td>
                     <td>
                         <form method="POST" th:action="@{/add-game-to-list(gameId=${op.id})}">
                             <button type="submit" name="submit" value="value" class="btn btn-outline-primary btn-sm">Add</button>

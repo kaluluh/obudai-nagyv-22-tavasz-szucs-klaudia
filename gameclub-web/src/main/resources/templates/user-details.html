@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link href="bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="custom.css" rel="stylesheet" type="text/css"/>
@@ -27,5 +27,42 @@
     </div>
 </div>
 </div>
+
+<div class="container" sec:authorize="hasAuthority('SUPERUSER')" style="margin-top: 5mm;">
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>My Games</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Min age</th>
+                    <th scope="col">No. players</th>
+                    <th scope="col">Play time</th>
+                    <th scope="col">Categories</th>
+                </tr>
+                </thead>
+                <tbody style="text-align:justify">
+                <tr th:each="g: ${games}">
+                    <td th:text="${g.name}"></td>
+                    <td th:text="${g.description}"></td>
+                    <td th:text="${g.minimumAge}"></td>
+                    <td th:text="${g.numberOfPlayers.toString()}"></td>
+                    <td th:text="${g.playTime.toString()}"> min</td>
+                    <td>
+                        <ul class="list-group list-group-flush"  th:each="c: ${g.categories}" >
+                            <li class="list-group-item" th:text="${c}"></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
