@@ -16,7 +16,6 @@ public class EventDateValidator implements ConstraintValidator<DateConstraint, S
         }   else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.SMART);
             LocalDate date = LocalDate.parse(dateStr, formatter);
-//            LocalDateTime date = LocalDateTime.of(LocalDate.parse(dateStr), LocalTime.MIN);
             if ((date).isAfter(LocalDate.now()) ) {
                 return true;
             }

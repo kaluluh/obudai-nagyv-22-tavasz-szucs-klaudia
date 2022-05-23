@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb2390d9-af76-444a-8baa-f7ba875ee447" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/TimeRangeConstraint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/TimeRangeValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/dto/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/dto/EventFormDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/dto/GameFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/dto/GameFormDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/DateConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/DateConstraint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/TestDataGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequestId.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/entity/JoinRequestId.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/EventDateValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/java/com/example/validation/EventDateValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-persistence/src/main/resources/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-service/src/main/java/com/example/GameClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/GameUserPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/GameUserPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/controller/GameClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/java/com/example/controller/GameClubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/add-game.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/add-game.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/event-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/event-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/games-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/games-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/group-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/group-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/user-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/user-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/my-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/gameclub-web/src/main/resources/templates/my-group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameclub-web/src/main/webapp/views/user-details.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,9 +264,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.GameClubApplication" />
+        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [clean]" />
         <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [build]" />
         <item itemvalue="Spring Boot.GameClub" />
-        <item itemvalue="Gradle.obudai-nagyv-22-tavasz-szucs-klaudia [clean]" />
         <item itemvalue="Gradle.PlayerActionTest.shouldLogin (1)" />
       </list>
     </recent_temporary>
@@ -339,7 +337,7 @@
       <workItem from="1653045374471" duration="8466000" />
       <workItem from="1653124321642" duration="30336000" />
       <workItem from="1653206943310" duration="26908000" />
-      <workItem from="1653293378882" duration="20992000" />
+      <workItem from="1653293378882" duration="27339000" />
     </task>
     <task id="LOCAL-00001" summary="Project structure setup">
       <created>1646500953765</created>
@@ -446,7 +444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653251741249</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Validation ready">
+      <created>1653317099820</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1653317099820</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,7 +486,8 @@
     <MESSAGE value="Modify one condition" />
     <MESSAGE value="Web base" />
     <MESSAGE value="Web almost ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web almost ready" />
+    <MESSAGE value="Validation ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validation ready" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

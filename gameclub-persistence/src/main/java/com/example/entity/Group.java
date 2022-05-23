@@ -22,8 +22,7 @@ public class Group {
     @ManyToMany
     @Target(Player.class)
     private List<Player> members;
-    @OneToMany
-//    @ElementCollection
+    @ManyToMany
     @JoinColumn(name = "groupId")
     private List<JoinRequest> joinRequests;
     @OneToOne

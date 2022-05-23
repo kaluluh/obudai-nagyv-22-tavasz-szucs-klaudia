@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.domain.Role;
 import com.example.entity.Player;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional

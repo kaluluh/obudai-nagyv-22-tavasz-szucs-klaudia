@@ -13,8 +13,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JoinRequestId implements Serializable {
-    //@OneToOne
     private Long playerId;
-    //@OneToOne
     private Long groupId;
 }

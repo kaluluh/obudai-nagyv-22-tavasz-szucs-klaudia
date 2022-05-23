@@ -40,7 +40,6 @@ public class GameClubController {
         model.addAttribute("currentGroup",  MetaData.currentPlayerGroup);
         model.addAttribute("joinableGroups", joinableGroups);
         model.addAttribute("currentPlayer", MetaData.currentPlayer);
-//        Boolean bool = MetaData.currentPlayerGroup.getJoinRequests().contains(MetaData.currentPlayer.getId());
         return "group-membership";
     }
 

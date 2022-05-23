@@ -107,22 +107,6 @@ public class GameClubService {
         return groups;
     }
 
-    public boolean addJoinRequest(int selectedNumber) {
-        List<Group> groups = getJoinableGroups();
-        boolean success = false;
-        if (selectedNumber <= groups.size()) {
-            Group selectedGroup = groups.get(selectedNumber - 1);
-            JoinRequestId joinRequestId = new JoinRequestId(MetaData.currentPlayer.getId(), selectedGroup.getId());
-            try {
-                joinRequestRepository.save(new JoinRequest(joinRequestId, JoinRequestState.REQUESTED));
-                success = true;
-            } catch (Exception e) {
-                log.error("Error saving join request", e);
-            }
-        }
-        return success;
-    }
-
     public List<JoinRequest> getJoinRequests() {
         return MetaData.currentPlayerGroup.getJoinRequests();
     }
@@ -143,8 +127,7 @@ public class GameClubService {
 
         try {
             oldJoinRequest.setJoinRequestState(joinRequest.getJoinRequestState());
-            joinRequestRepository.delete(oldJoinRequest);
-            joinRequestRepository.save(joinRequest);
+            joinRequestRepository.save(oldJoinRequest);
             if (joinRequest.getJoinRequestState() == JoinRequestState.ACCEPTED) {
                 Player newPlayer = playerRepository.findById(joinRequest.getJoinRequestId().getPlayerId()).orElse(null);
                 MetaData.currentPlayerGroup.getMembers().add(newPlayer);
@@ -153,10 +136,6 @@ public class GameClubService {
         } catch (Exception e) {
             log.error("Error handling join request", e);
         }
-    }
-
-    public void quitApplication() {
-        System.exit(0);
     }
 
     public void attendGroup(Long playerId,Long groupId) {
