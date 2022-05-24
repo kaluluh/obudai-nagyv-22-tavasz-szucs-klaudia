@@ -11,9 +11,9 @@ INSERT INTO PLAYERS(id, login_name, name, password, email) VALUES
                 ( 2, 'horvatha', 'Horváth Ádám', 'ha-secret', 'horvath.adam@gmail.com'), --group-admin
                 ( 3, 'kovacsp', 'Kovács Péter', 'kp-secret', 'kovacs.peter@gmail.com'), --player
                 ( 4, 'kissi', 'Kiss István', 'ki-secret', 'kiss.istvan@gmail.com'),
-                ( 5, 'kaluluh', 'Szücs Klaudia', 'asd-123', 'szucs.klaudia@gmail.com');
+                ( 5, 'kaluluh', 'Szücs Klaudia', 'asd-123', 'szucs.klaudia@gmail.com'); --group-admin
 
-INSERT INTO PLAYERS_GAMES VALUES ( 2, 1), ( 2, 2), ( 3, 1 ), (4,2), (5,1),(5,2);
+INSERT INTO PLAYERS_GAMES VALUES ( 2, 1), ( 2, 2), ( 3, 1 ), (4,2), (5,1);
 
 INSERT INTO PLAYER_ROLES VALUES ( 1, 2 ), ( 2, 1), ( 2, 0), ( 3, 0), ( 4, 0), ( 5, 1),(5,0);
 

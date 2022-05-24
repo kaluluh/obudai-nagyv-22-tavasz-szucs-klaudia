@@ -97,7 +97,7 @@ public class GameClubController {
     @RequestMapping(value = "/attend-event", method = RequestMethod.POST)
     public String attendEvent(@RequestParam("playerId") String playerId, @RequestParam("eventId") String eventId) {
         gameClubService.attendEvent(Long.valueOf(playerId),Long.valueOf(eventId));
-        return "redirect:/my-group";
+        return "redirect:/group-details/" + MetaData.currentPlayerGroup.getId();
     }
 
     @RequestMapping(value = "/handle-join-requests", method = RequestMethod.POST)

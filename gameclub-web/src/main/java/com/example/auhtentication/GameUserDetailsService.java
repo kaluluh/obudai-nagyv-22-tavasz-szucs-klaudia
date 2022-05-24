@@ -1,4 +1,4 @@
-package com.example;
+package com.example.auhtentication;
 
 import com.example.entity.Player;
 import com.example.repository.PlayerRepository;
